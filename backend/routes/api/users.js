@@ -4,11 +4,13 @@ const bcrypt = require('bcryptjs');
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
+const { validateSignup } = require('../../utils/validation');
 const router = express.Router();
 
 // Sign up
 router.post(
   '/',
+  validateSignup,
   async (req, res) => {
     const { email, password, username } = req.body;
     const hashedPassword = bcrypt.hashSync(password);
