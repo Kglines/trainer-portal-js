@@ -1,12 +1,12 @@
 // frontend/src/App.js
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import LoginFormPage from './components/LoginFormPage';
+import LoginFormPage from './pages/LoginFormPage';
 
 function App() {
   return (
     <Switch>
-      <Route path='/login'>
+      <Route path='/'>
         <LoginFormPage />
       </Route>
     </Switch>
