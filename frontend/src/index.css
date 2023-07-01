@@ -1,4 +1,15 @@
 /* TODO Add site wide styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto+Flex:wght@400;700&family=Roboto:wght@400;700&family=Ubuntu:wght@400;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html, body {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    background-color: rgb(222, 222, 222);
+    /* font-family: 'Roboto Flex'; */
+    font-family: 'Poppins';
+    /* font-family: 'Ubuntu'; */
+}
