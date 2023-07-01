@@ -43,14 +43,17 @@ function Navigation({ isLoaded }) {
 
   return (
     <nav className='bg-primary w-full h-10'>
-      <ul className='flex flex-row color-white justify-around items-center'>
+      {sessionUser ? <ul className='flex flex-row color-white justify-around items-center'>
         <li className='text-white mt-2'>
-          <NavLink exact to='/' className='text-white'>
+          <NavLink exact to='/' className='text-white mx-4'>
             Home
+          </NavLink>
+          <NavLink exact to='/clients' className='text-white mx-4'>
+            Clients
           </NavLink>
         </li>
         {isLoaded && sessionLinks}
-      </ul>
+      </ul> : <p className='text-white text-center text-3xl pt-1'>HAC Trainer Portal</p>}
     </nav>
   );
 }
