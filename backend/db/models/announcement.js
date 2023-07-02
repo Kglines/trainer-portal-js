@@ -14,9 +14,25 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Announcement.init({
-    userId: DataTypes.INTEGER,
-    month: DataTypes.INTEGER,
-    body: DataTypes.STRING
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    month: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        isNumeric: true
+      }
+    },
+    body: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1, 500]
+      }
+    ,
+  }
   }, {
     sequelize,
     modelName: 'Announcement',
