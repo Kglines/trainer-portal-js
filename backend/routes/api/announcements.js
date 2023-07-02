@@ -5,8 +5,8 @@ const { Announcement } = require('../../db/models');
 
 // Get All Announcements
 router.get('', requireAuth, async (req, res) => {
-    const Announcements = await Announcement.findAll();
-    res.json({ Announcements });
+    const announcements = await Announcement.findAll();
+    res.json({ announcements });
 })
 
 module.exports = router;

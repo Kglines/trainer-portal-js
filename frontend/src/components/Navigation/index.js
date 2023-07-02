@@ -12,11 +12,11 @@ function Navigation({ isLoaded }) {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  // const logout = (e) => {
-  //   e.preventDefault();
-  //   dispatch(sessionActions.logout());
-  //   history.push('/')
-  // };
+  const logout = (e) => {
+    e.preventDefault();
+    dispatch(sessionActions.logout());
+    history.push('/')
+  };
 
   let sessionLinks;
   if (sessionUser) {
@@ -29,9 +29,9 @@ function Navigation({ isLoaded }) {
             <option>Logout</option>
           </select>
         </div> */}
-        {/* <button onClick={logout} className='text-white mx-6 hover:outline px-2'>
+        <button onClick={logout} className='text-white mx-6 hover:outline px-2'>
           Log Out
-        </button> */}
+        </button>
       </li>
     );
   } else {
