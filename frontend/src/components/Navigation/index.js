@@ -12,20 +12,26 @@ function Navigation({ isLoaded }) {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const logout = (e) => {
-    e.preventDefault();
-    dispatch(sessionActions.logout());
-    history.push('/')
-  };
+  // const logout = (e) => {
+  //   e.preventDefault();
+  //   dispatch(sessionActions.logout());
+  //   history.push('/')
+  // };
 
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
       <li className='flex mt-2'>
-        {/* <ProfileButton user={sessionUser} /> */}
-        <button onClick={logout} className='text-white mx-6'>
+        <ProfileButton user={sessionUser} />
+        {/* <div className='rounded-full'>
+          <select className='rounded-lg' placeholder='Profile'>
+            <option>Profile</option>
+            <option>Logout</option>
+          </select>
+        </div> */}
+        {/* <button onClick={logout} className='text-white mx-6 hover:outline px-2'>
           Log Out
-        </button>
+        </button> */}
       </li>
     );
   } else {
@@ -43,17 +49,31 @@ function Navigation({ isLoaded }) {
 
   return (
     <nav className='bg-primary w-full h-10'>
-      {sessionUser ? <ul className='flex flex-row color-white justify-around items-center'>
-        <li className='text-white mt-2'>
-          <NavLink exact to='/' className='text-white mx-4'>
-            Home
-          </NavLink>
-          <NavLink exact to='/clients' className='text-white mx-4'>
-            Clients
-          </NavLink>
-        </li>
-        {isLoaded && sessionLinks}
-      </ul> : <p className='text-white text-center text-3xl pt-1'>HAC Trainer Portal</p>}
+      {sessionUser ? (
+        <ul className='flex flex-row color-white justify-around items-center'>
+          <li className='text-white mt-2'>
+            <NavLink
+              exact
+              to='/'
+              className='text-white mx-4 hover:outline px-2'
+            >
+              Home
+            </NavLink>
+            <NavLink
+              exact
+              to='/clients'
+              className='text-white mx-4 hover:outline px-2'
+            >
+              Clients
+            </NavLink>
+          </li>
+          {isLoaded && sessionLinks}
+        </ul>
+      ) : (
+        <p className='text-white text-center text-3xl pt-1'>
+          HAC Trainer Portal
+        </p>
+      )}
     </nav>
   );
 }

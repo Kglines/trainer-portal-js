@@ -14,7 +14,7 @@ function ProfileButton({ user }) {
   };
 
   useEffect(() => {
-    if (showMenu) return;
+    if (!showMenu) return;
 
     
     const closeMenu = (e) => {
@@ -22,13 +22,15 @@ function ProfileButton({ user }) {
         console.log('YOU ARE CLOSING!!!')
         setShowMenu(false);
       }
-      
+      setShowMenu(false);
     };
 
     document.addEventListener('click', closeMenu);
 
     return () => document.removeEventListener('click', closeMenu);
   }, [showMenu]);
+
+  const closeMenu = () => setShowMenu(false);
 
   const logout = (e) => {
     e.preventDefault();
@@ -50,7 +52,7 @@ function ProfileButton({ user }) {
             </li>
             <li>{user.email}</li>
             <li>
-            <button onClick={logout}>Log Out</button>
+            <button onClick={logout} className='bg-secondary text-white'>Log Out</button>
             </li>
         </ul>
       )}

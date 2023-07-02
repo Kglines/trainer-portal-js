@@ -38,7 +38,7 @@ function LoginFormPage() {
             onChange={(e) => setCredential(e.target.value)}
             placeholder=' Username or Email'
             required
-            className='border rounded my-2 space-x-0 h-8 w-48'
+            className='border rounded my-2 space-x-0 h-8 w-64 px-1'
           />
         </label>
         <label>
@@ -48,14 +48,14 @@ function LoginFormPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder=' Password'
-            className='border rounded my-2 h-8 w-48'
+            className='border rounded my-2 h-8 w-64 px-1'
             required
           />
         </label>
         {errors.credential && <p>{errors.credential}</p>}
         <button
           type='submit'
-          className='bg-secondary text-white rounded px-4 py-1 w-48 mx-auto my-4 hover:bg-secondaryHover'
+          className='bg-secondary text-white rounded px-4 py-1 w-64 mx-auto my-4 hover:bg-secondaryHover'
         >
           Log In
         </button>
