@@ -6,6 +6,7 @@ import OpenModalButton from '../components/OpenModalButton';
 import EditAnnouncementForm from '../components/EditAnnouncementForm.js';
 import DeleteAnnouncement from '../components/DeleteAnnouncement';
 import CreateAnnouncement from '../components/CreateAnnouncement';
+import parser from 'html-react-parser';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -51,12 +52,12 @@ const HomePage = () => {
                 key={announcement?.id}
                 className='py-1 flex flex-nowrap odd:white even:bg-lightGrey justify-between'
               >
-                {announcement?.body}{' '}
+                {parser(announcement?.body)}{' '}
                 {sessionUser.isAdmin && (
                   <div className='flex justify-end'>
                     <OpenModalButton
                       buttonText={
-                        <i class='fa fa-pencil' aria-hidden='true'></i>
+                        <i className='fa fa-pencil' aria-hidden='true'></i>
                       }
                       className='text-secondary px-1'
                       modalComponent={
@@ -68,7 +69,7 @@ const HomePage = () => {
                         <DeleteAnnouncement announcementId={announcement?.id} />
                       }
                       buttonText={
-                        <i class='fa fa-trash' aria-hidden='true'></i>
+                        <i className='fa fa-trash' aria-hidden='true'></i>
                       }
                       className='text-primary px-1'
                     />

@@ -2,9 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { fetchCreateAnnouncement, fetchGetAnnouncements } from '../../store/announcements';
 import { useModal } from '../../context/Modal.js';
-import ReactQuill, { Quill } from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-import parse from 'html-react-parser';
+import QuillEditor from '../QuillEditor';
 
 const CreateAnnouncement = () => {
     const dispatch = useDispatch();
@@ -40,20 +38,15 @@ const CreateAnnouncement = () => {
     const handleChange = (text) => {
       setBody(text)
     }
+    
+    const isDisabled = () => {
+      if(body.length <= 1){
+        return true
+      } else {
+        return false
+      }
+    }    
 
-    const modules = {
-    toolbar: [
-      [{ 'header': [1, 2, false] }],
-      ['bold', 'italic', 'underline','strike', 'blockquote'],
-      [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-      ['link', 'image'],
-      ['clean']
-    ],
-  }
-
-    const formats = [
-      'font', 'size', 'bold', 'italics', 'underline', 'strike', 'color', 'header', 'indent', 'list', 'direction', 'align', 'link', 'image'    
-    ]
   return (
     <form onSubmit={handleSubmit} className='w-auto h-96'>
       <div>
@@ -61,42 +54,27 @@ const CreateAnnouncement = () => {
           Create Announcement
         </h2>
       </div>
-        <ul>
-          {validationErrors &&
-              validationErrors?.map((error) => 
-                <li key={error}>{error}</li>
-          )}
-        </ul>
+      <ul>
+        {validationErrors &&
+          validationErrors?.map((error) => <li key={error}>{error}</li>)}
+      </ul>
       <div className='my-4 p-4 flex flex-col h-64'>
-        <input
-          type='number'
-          value={month}
-          onChange={(e) => setMonth(e.target.value)}
-          placeholder='Number of Month'
-          className='bg-lightGrey my-2 h-12 text-xl'
-        />
-        
-          <ReactQuill
-            value={body}
-            onChange={handleChange}
-            placeholder='Announcement here...'
-            theme='snow'
-            formats={formats}
-            modules={modules}
+        <label className='mx-2'>
+          Month
+          <input
+            type='number'
+            value={month}
+            onChange={(e) => setMonth(e.target.value)}
+            name='Month'
+            className='bg-lightGrey my-2 h-12 text-xl mx-2 w-16 px-3'
           />
-        
-        {/* <textarea
-          type='text'
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
-          placeholder='Announcement here...'
-          className='bg-lightGrey my-2 h-36 text-xl'
-        /> */}
+        </label>
+        <QuillEditor value={body} setValue={handleChange} />
       </div>
       <div className='text-center my-4'>
         <button
           type='submit'
-          disabled={!body}
+          disabled={isDisabled()}
           className='bg-primary hover:bg-primaryHover text-white rounded p-2 mx-2 disabled:bg-disabledPrimary'
         >
           Submit

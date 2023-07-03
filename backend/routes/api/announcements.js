@@ -1,4 +1,5 @@
 const express = require('express');
+const parse = require('html-react-parser');
 const router = express.Router();
 const { requireAuth } = require('../../utils/auth');
 const { Announcement } = require('../../db/models');
@@ -22,11 +23,14 @@ router.get('', requireAuth, async (req, res) => {
 router.post('/', requireAuth, async (req, res) => {
     const { user } = req;
     const { month, body } = req.body;
+    let newBody = parse(body);
+    console.log('***************************** ', newBody.props.children)
     const announcement = await Announcement.create({
-        userId: user.id,
-        month,
-        body
-    })
+      userId: user.id,
+      month,
+    //   body: newBody.props.children,
+      body
+    });
     res.status(201);
     res.json(announcement);
 })
@@ -42,7 +46,6 @@ router.put('/:announcementId', requireAuth, async (req, res) => {
             month,
             body
         })
-        console.log('************************************* ', announcement)
         res.json(announcement)
     } else {
         const error = new Error("Announcement couldn't be found");
@@ -56,7 +59,7 @@ router.delete('/:announcementId', requireAuth, async (req, res) => {
     const { announcementId } = req.params;
 
     const announcement = await Announcement.findByPk(announcementId);
-    console.log('************************************** ', announcement)
+   
     if(announcement){
         await announcement.destroy();
         return res.json({
