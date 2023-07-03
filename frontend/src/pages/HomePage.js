@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 import { fetchGetAnnouncements } from '../store/announcements';
@@ -13,13 +13,19 @@ const HomePage = () => {
   const sessionUser = useSelector(state => state.session.user);
   const today = new Date();
   const currentMonth = today.getMonth();
-  const announcements = Object.values(useSelector(state => state.announcements)).filter(announcement => announcement.month === currentMonth + 1)
+  const announcements = Object.values(useSelector(state => state.announcements))
+
+  const myAnnouncements = useMemo(() => {
+    const data = announcements.filter(
+      (announcement) => announcement.month === currentMonth + 1)
+      return data;
+  }, [announcements, currentMonth])
 
   useEffect(() => {
     dispatch(fetchGetAnnouncements())
   }, [dispatch])
 
-  console.log('ANNOUNCEMENTS === ', announcements)
+  console.log('MY ANNOUNCEMENTS === ', myAnnouncements)
 
   if(!sessionUser) return <Redirect to='/'/>
   return (
@@ -40,7 +46,7 @@ const HomePage = () => {
         </div>
         <div className='my-8 pb-24'>
           <ul className='text-left w-4/5 mx-auto flex-row'>
-            {announcements?.map((announcement) => (
+            {myAnnouncements?.map((announcement) => (
               <li
                 key={announcement?.id}
                 className='py-1 flex flex-nowrap odd:white even:bg-lightGrey justify-between'
@@ -49,13 +55,21 @@ const HomePage = () => {
                 {sessionUser.isAdmin && (
                   <div className='flex justify-end'>
                     <OpenModalButton
-                      buttonText='EDIT'
+                      buttonText={
+                        <i class='fa fa-pencil' aria-hidden='true'></i>
+                      }
                       className='text-secondary px-1'
-                      modalComponent={<EditAnnouncementForm />}
+                      modalComponent={
+                        <EditAnnouncementForm announcement={announcement} />
+                      }
                     />
                     <OpenModalButton
-                      modalComponent={<DeleteAnnouncement />}
-                      buttonText='DELETE'
+                      modalComponent={
+                        <DeleteAnnouncement announcementId={announcement?.id} />
+                      }
+                      buttonText={
+                        <i class='fa fa-trash' aria-hidden='true'></i>
+                      }
                       className='text-primary px-1'
                     />
                   </div>
