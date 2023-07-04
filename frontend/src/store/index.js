@@ -4,11 +4,13 @@ import thunk from 'redux-thunk';
 import sessionReducer from './session';
 import announcementsReducer from './announcements';
 import clientsReducer from './clients';
+import monthlyClientReportsReducer from './monthlyClientReports';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   announcements: announcementsReducer,
-  clients: clientsReducer
+  clients: clientsReducer,
+  monthlyClientReports: monthlyClientReportsReducer
 });
 
 let enhancer;
