@@ -8,6 +8,8 @@ import HomePage from './pages/HomePage';
 import * as sessionActions from './store/session';
 import Navigation from './components/Navigation';
 import ClientsPage from './pages/ClientsPage';
+import ReportsPage from './pages/ReportsPage';
+import MonthlyClientReportsPage from './pages/MonthlyClientReportsPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -32,6 +34,12 @@ function App() {
           </Route>
           <Route path='/clients' exact>
             <ClientsPage />
+          </Route>
+          <Route path='/reports' exact>
+            <ReportsPage />
+          </Route>
+          <Route path='/monthly-client-reports' exact>
+            <MonthlyClientReportsPage />
           </Route>
         </Switch>
       )}
