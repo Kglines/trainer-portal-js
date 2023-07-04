@@ -25,7 +25,6 @@ export const fetchGetClients = () => async (dispatch) => {
 
     if(res.ok){
         const clients = await res.json();
-        console.log('CLIENTS in STORE === ', clients)
         dispatch(getClients(clients));
         return clients;
     };

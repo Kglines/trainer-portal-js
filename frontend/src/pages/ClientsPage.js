@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchGetClients } from '../store/clients';
 import OpenModalButton from '../components/OpenModalButton';
 import CreateClient from '../components/CreateClient';
+import ClientReport from '../components/ClientReport';
 
 const ClientsPage = () => {
   const dispatch = useDispatch();
@@ -11,7 +12,7 @@ const ClientsPage = () => {
   const clients = useSelector(state => state.clients);
 
   const myClients = clients?.clients?.filter(client => client?.userId === sessionUser?.id)
-  console.log('CLIENTS === ', clients.clients)
+  // console.log('CLIENTS === ', clients.clients)
 
   useEffect(() => {
     dispatch(fetchGetClients())
@@ -53,7 +54,7 @@ const ClientsPage = () => {
             <tr className='h-12 text-lg'>
               <th className='border'>First Name</th>
               <th className='border'>Last Name</th>
-              <th className='border'>Active?</th>
+              {/* <th className='border'>Active?</th> */}
             </tr>
           </thead>
           <tbody>
@@ -64,16 +65,18 @@ const ClientsPage = () => {
               >
                 <td className='border'>{client?.firstname}</td>
                 <td className='border'>{client?.lastname}</td>
-                <td className='border'>
+                {/* <td className='border'>
                   <input type='checkbox' checked={client?.isActive} />
-                </td>
+                </td> */}
               </tr>
             ))}
           </tbody>
         </table>
-        <button className='bg-primary text-white rounded-md p-2 mt-2 w-1/3'>
-          Generate Report
-        </button>
+        <OpenModalButton
+          buttonText='Generate Report'
+          className='bg-primary text-white rounded-md p-2 mt-2 w-1/3'
+          modalComponent={<ClientReport />}
+        />
       </div>
     </div>
   );

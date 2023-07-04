@@ -56,9 +56,9 @@ const CreateClient = () => {
       <div className='my-4 p-4 flex flex-col h-56'>
         <input className='bg-lightGrey my-2 h-12 text-xl mx-2 w-64 px-3' type='text' placeholder='First name' value={firstname} onChange={(e) => setFirstname(e.target.value)}/>
         <input className='bg-lightGrey my-2 h-12 text-xl mx-2 w-64 px-3' type='text' placeholder='Last name' value={lastname} onChange={(e) => setLastname(e.target.value)}/>
-        <label>
+        <label className='pl-2 mt-6'>
           Active this month?
-        <input className='bg-lightGrey mx-2 text-xl w-4 px-3' type='checkbox' placeholder='Active this month?' value={isActive} onChange={(e) => setIsActive(e.target.value)}/>
+        <input className='bg-lightGrey mx-2 text-xl w-8 h-4 px-3' type='checkbox' placeholder='Active this month?' value={isActive} onChange={(e) => setIsActive(e.target.value)}/>
         </label>
       </div>
       <div className='text-center my-4'>
