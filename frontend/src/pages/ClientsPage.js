@@ -27,26 +27,6 @@ const ClientsPage = () => {
           buttonText='+ New Client'
           className='bg-secondary text-white rounded-md p-2 mt-2 sm:w-full md:w-5/6 mx-auto hover:bg-secondaryHover'
         />
-        {/* <div className='h-8 flex flex-col border rounded-sm mt-4 w-full sm:mx-0 md:mx-auto sm:w-5/6'>
-          <label htmlFor='month-select' className='sm:w-12'></label>
-          <select id='month-select text-center border sm:w-12'>
-            <option className='text-center flex flex-auto h-40'>
-              --Please choose a month--
-            </option>
-            <option className='text-center'>January</option>
-            <option className='text-center'>February</option>
-            <option className='text-center'>March</option>
-            <option className='text-center'>April</option>
-            <option className='text-center'>May</option>
-            <option className='text-center'>June</option>
-            <option className='text-center'>July</option>
-            <option className='text-center'>August</option>
-            <option className='text-center'>September</option>
-            <option className='text-center'>October</option>
-            <option className='text-center'>November</option>
-            <option className='text-center'>December</option>
-          </select>
-        </div> */}
       </div>
       <div className='sm:w-full md:w-2/3 mx-auto mt-8 mb-12 pb-12'>
         <table className='w-full table-auto border border-collapse mb-8 pb-8'>

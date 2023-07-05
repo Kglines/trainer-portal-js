@@ -1,6 +1,7 @@
 import { csrfFetch } from './csrf';
 
 const GET_MONTHLY_CLIENT_REPORTS = 'monthlyClientReports/get';
+const CREATE_MONTHLY_CLIENT_REPORTS = 'monthlyClientReports/create';
 
 export const getMonthlyClientReports = (reports) => {
     return {
@@ -8,6 +9,13 @@ export const getMonthlyClientReports = (reports) => {
         payload: reports
     };
 };
+
+export const createMonthlyClientReports = (reports) => {
+    return {
+        type: CREATE_MONTHLY_CLIENT_REPORTS,
+        payload: reports
+    }
+}
 
 export const fetchGetMonthlyClientReports = () => async (dispatch) => {
     const res = await csrfFetch('/api/monthly-client-reports');
@@ -21,6 +29,21 @@ export const fetchGetMonthlyClientReports = () => async (dispatch) => {
     return res;
 };
 
+export const fetchCreateMonthlyClientReports = (report) => async (dispatch) => {
+    const res = await csrfFetch('/api/monthly-client-reports', {
+        method: 'POST',
+        header: { 'Content-Type': 'application/json'},
+        body: JSON.stringify(report)
+    })
+
+    if (res.ok){
+        const report = await res.json();
+        dispatch(getMonthlyClientReports(report));
+        return report;
+    };
+    return res;
+};
+
 const initialState = {};
 
 const monthlyClientReportsReducer = (state = initialState, action) => {
@@ -28,7 +51,10 @@ const monthlyClientReportsReducer = (state = initialState, action) => {
 
     switch(action.type){
         case GET_MONTHLY_CLIENT_REPORTS:
-            action.payload.monthlyClientReports.forEach(report => newState[report.id] = newState);
+            action.payload.monthlyClientReports?.forEach(report => newState[report?.id] = report);
+            return newState;
+        case CREATE_MONTHLY_CLIENT_REPORTS:
+            newState = { ...state, [action.payload.id]: action.payload };
             return newState;
         default:
             return newState;
