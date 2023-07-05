@@ -13,7 +13,7 @@ const ClientReport = () => {
 
   const monthlyClientReports = Object.values(useSelector(state => state.monthlyClientReports)).filter(report => report.userId === sessionUser.id)
 
-  console.log('Monthly Reports === ', monthlyClientReports)
+  // console.log('Monthly Reports === ', monthlyClientReports)
 
   
   useEffect(() => {
@@ -32,9 +32,9 @@ const ClientReport = () => {
   const [validationErrors, setValidationErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
- const myReports = monthlyClientReports.find((report) => report?.month);
-console.log('This Month === ', reportMonth);
- console.log('YMYMYMyMYMyM == ', myReports);
+//  const myReports = monthlyClientReports.find((report) => report?.month);
+// console.log('This Month === ', reportMonth);
+//  console.log('YMYMYMyMYMyM == ', myReports);
  
  
  
