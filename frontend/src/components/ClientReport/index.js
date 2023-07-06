@@ -50,7 +50,7 @@ const ClientReport = () => {
     })
     
     if(duplicate) return setValidationErrors([
-      'You already submitted at report for this month.',
+      'You already submitted a report for this month.',
     ]);
 
     return dispatch(fetchCreateMonthlyClientReports(payload))

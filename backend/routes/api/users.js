@@ -37,9 +37,6 @@ router.get('/monthly-client-reports', requireAuth, async (req, res) => {
     include: [
       {
         model: MonthlyClientReport,
-        where: {
-          userId: id
-        }
       }
     ]
   });

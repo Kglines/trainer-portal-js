@@ -30,7 +30,7 @@ export const fetchGetUsers = () => async (dispatch) => {
 };
 
 export const fetGetUsersReports = () => async (dispatch) => {
-    const res = await csrfFetch('/api/monthly-client-reports');
+    const res = await csrfFetch('/api/users/monthly-client-reports');
 
     if(res.ok){
         const usersReports = await res.json();
@@ -51,8 +51,8 @@ const usersReducer = (state = initialState, action) => {
             // newState = action.payload
             return newState;
         case GET_USERS_REPORTS:
-            // action.payload.users.forEach(user => newState[user.id] = user);
-            newState = action.payload;
+            action.payload.users.forEach(user => newState[user.id] = user);
+            // newState = action.payload;
             return newState;
         default:
             return newState;

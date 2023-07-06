@@ -33,12 +33,12 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'MonthlyClientReport',
-    indexes: [
-      {
-        unique: true,
-        fields: ['month', 'year']
-      }
-    ]
+    // indexes: [
+    //   {
+    //     unique: true,
+    //     fields: ['month', 'year']
+    //   }
+    // ]
   });
   return MonthlyClientReport;
 };

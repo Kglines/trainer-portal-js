@@ -52,6 +52,16 @@ module.exports = {
           profileImg:
             'https://i0.wp.com/hachealthclub.blog/wp-content/uploads/2020/02/DSC_5243_edit.jpg?fit=1200%2C800&ssl=1',
         },
+        {
+          email: 'reneepaoli@gmail.com',
+          username: 'reneepaoli',
+          firstname: 'Renee',
+          lastname: 'Paoli',
+          hashedPassword: bcrypt.hashSync('password'),
+          isAdmin: false,
+          profileImg:
+            'https://i0.wp.com/hachealthclub.blog/wp-content/uploads/2021/06/DSC_6267-Crop.jpg?resize=715%2C400&ssl=1',
+        },
       ],
       {}
     );
