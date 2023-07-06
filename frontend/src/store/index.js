@@ -5,12 +5,14 @@ import sessionReducer from './session';
 import announcementsReducer from './announcements';
 import clientsReducer from './clients';
 import monthlyClientReportsReducer from './monthlyClientReports';
+import usersReducer from './users';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   announcements: announcementsReducer,
   clients: clientsReducer,
-  monthlyClientReports: monthlyClientReportsReducer
+  monthlyClientReports: monthlyClientReportsReducer,
+  users: usersReducer
 });
 
 let enhancer;

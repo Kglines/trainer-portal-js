@@ -3,9 +3,49 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User } = require('../../db/models');
+const { User, MonthlyClientReport } = require('../../db/models');
 const { validateSignup } = require('../../utils/validation');
 const router = express.Router();
+
+router.get('', requireAuth, async (req, res) => {
+  const users = await User.findAll({
+    attributes: [
+      'id',
+      'username',
+      'firstname',
+      'lastname',
+      'email',
+      'isAdmin',
+      'profileImg'
+    ]
+  });
+
+  res.json({ users });
+})
+
+router.get('/monthly-client-reports', requireAuth, async (req, res) => {
+  const users = await User.findAll({
+    attributes: [
+      'id',
+      'username',
+      'firstname',
+      'lastname',
+      'email',
+      'isAdmin',
+      'profileImg',
+    ],
+    include: [
+      {
+        model: MonthlyClientReport,
+        where: {
+          userId: id
+        }
+      }
+    ]
+  });
+
+  res.json({ users })
+})
 
 // Sign up
 router.post(
