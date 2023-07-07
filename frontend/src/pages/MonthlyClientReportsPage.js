@@ -17,6 +17,21 @@ const MonthlyClientReportsPage = () => {
     dispatch(fetGetUsersReports());
   }, [dispatch])
 
+  const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
+
   console.log('USERS === ', usersReports)
   return (
     <div className='sm:w-full md:w-5/6 bg-white mx-auto text-center h-screen'>
@@ -24,18 +39,30 @@ const MonthlyClientReportsPage = () => {
         <h2 className='text-3xl pt-12'>Monthly Client Reports</h2>
       </div>
       <div>
-        {usersReports?.map((user) => (
-          <div className='flex justify-between'>
-            <p className='text-left ml-4'>
-              {user.firstname}{' '}{user.lastname}{' '}
-            </p>
-            <div className='flex justify-end align-middle'>
-              {user.MonthlyClientReports.map(report => (
-                <p className='mx-4' key={report.id}>{report.month}</p>
+        <table>
+          <thead className=''>
+            <tr className=''>
+              <th>Trainer</th>
+              {months.map((month, idx) => (
+                <th key={idx} className='px-6 odd:bg-lightGrey'>
+                  {month}
+                </th>
               ))}
-            </div>
-          </div>
-        ))}
+            </tr>
+          </thead>
+          <tbody>
+            {usersReports.map((user) => (
+              <tr className='odd:bg-white even:bg-lightGrey h-12 text-lg'>
+                <td>
+                  {user.firstname} {user.lastname}
+                </td>
+                {user.MonthlyClientReports?.map((report) => (
+                  <td>{report.month}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
