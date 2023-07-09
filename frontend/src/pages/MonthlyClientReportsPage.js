@@ -46,7 +46,6 @@ const MonthlyClientReportsPage = () => {
       }
 
       result.push(monthlyReport);
-      console.log('RESULT ============ ', result[0])
     }
 
     return result;
@@ -63,41 +62,48 @@ const MonthlyClientReportsPage = () => {
   
 
   return (
-    <div className='sm:w-full md:w-5/6 bg-white mx-auto text-center h-screen'>
+    <div className='sm:w-full md:w-5/6 bg-white mx-auto text-center h-screen overflow-auto'>
       <div className='flex flex-col mx-auto xs:w-3/4 md:w-full mb-8'>
         <h2 className='text-3xl pt-12'>Monthly Client Reports</h2>
       </div>
-      <div className='flex'>
+      <div className='flex lg:justify-center md:w-full'>
         <table>
-          <thead className=''>
-            <tr className=''>
+          <thead className='border border-collapse'>
+            <tr className='border border-collapse'>
               <th>Trainer</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className='border border-collapse'>
             {usersReports.map((user) => (
-              <tr key={user?.id}>{user?.firstname}</tr>
+              <tr key={user?.id} className='even:bg-lightGrey border'>
+                {user?.firstname}
+              </tr>
             ))}
           </tbody>
         </table>
-        <table>
-          <thead className=''>
-            <tr className=''>
+        <table className='border border-collapse'>
+          <thead className='border border-collapse'>
+            <tr className='border border-collapse'>
               {months.map((month, idx) => (
-                <th key={idx} className='px-6 odd:bg-lightGrey'>
+                <th key={idx} className='px-6 odd:bg-lightGrey border'>
                   {month}
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody>
-              {monthlyReports.map((reports, index) => (
-                    <tr>
-                  {reports.map((report, idx) => (
-                      <td key={report?.id}>{report}</td>
-                  ))}
-                    </tr>
+          <tbody className='border border-collapse'>
+            {monthlyReports.map((reports, index) => (
+              <tr className='even:bg-lightGrey border'>
+                {reports.map((report, idx) => (
+                  <td key={report?.id} className='border border-collapse'>
+                    {/* <input type='checkbox' checked={report} readOnly/> */}
+                    <div className='bg-secondary w-4 text-center mx-auto text-secondary'>
+                      {report}
+                    </div>
+                  </td>
                 ))}
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
