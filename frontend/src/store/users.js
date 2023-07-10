@@ -19,7 +19,7 @@ export const getUsersReports = (reports) => {
 
 export const fetchGetUsers = () => async (dispatch) => {
     const res = await csrfFetch('/api/users');
-    console.log('* * * * * * * * * * * USERS RES * * * * * ', res)
+    
     if (res.ok) {
         const users = await res.json();
         dispatch(getUsers(users));
@@ -31,7 +31,7 @@ export const fetchGetUsers = () => async (dispatch) => {
 
 export const fetchGetUsersReports = () => async (dispatch) => {
     const res = await csrfFetch('/api/users/monthly-client-reports');
-console.log('* * * * * * * * * * * USERS RES * * * * * ', res);
+
     if(res.ok){
         const usersReports = await res.json();
         dispatch(getUsersReports(usersReports));

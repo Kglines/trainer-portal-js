@@ -42,25 +42,28 @@ router.get('/monthly-client-reports', requireAuth, async (req, res) => {
     include: [
       {
         model: MonthlyClientReport,
-      }
-    ]
+      },
+    ],
+    where: {
+      isAdmin: false
+    }
   });
 
-  const usersGrid = () => {
-    const res = {};
-    users.forEach((user) => {
-    return user.MonthlyClientReports.forEach((report) => {
-      for (let i = 1; i <= 12; i++) {
-        if (res[i] === undefined || res[i] === null && i === report.dataValues.month) {
-          res[i] = report.month;
-        } else {
-          res[i] = null;
-        }
-      }
-    });
-  })
-  return res;
-};
+//   const usersGrid = () => {
+//     const res = {};
+//     users.forEach((user) => {
+//     return user.MonthlyClientReports.forEach((report) => {
+//       for (let i = 1; i <= 12; i++) {
+//         if (res[i] === undefined || res[i] === null && i === report.dataValues.month) {
+//           res[i] = report.month;
+//         } else {
+//           res[i] = null;
+//         }
+//       }
+//     });
+//   })
+//   return res;
+// };
 
   // console.log('*********************** ', usersGrid())
 

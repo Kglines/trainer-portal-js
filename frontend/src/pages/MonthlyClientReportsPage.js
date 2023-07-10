@@ -1,20 +1,20 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchGetUsersReports, fetchGetUsers } from '../store/users';
+import { fetchGetUsersReports } from '../store/users';
 
 const MonthlyClientReportsPage = () => {
   const dispatch = useDispatch();
 
   // const users = useSelector(state => state.users);
-  const usersReports = Object.values(useSelector(state => state.users)).slice(2);
+  const usersReports = Object.values(useSelector(state => state.users))
 
   // const usersReports = useSelector(state => state.users.users)
 console.log('USERS ******************** ', usersReports)
 
   useEffect(() => {
     dispatch(fetchGetUsersReports());
-    
   }, [dispatch]);
+
   const months = [
     'Jan',
     'Feb',
@@ -30,9 +30,6 @@ console.log('USERS ******************** ', usersReports)
     'Dec',
   ];
 
-  // useEffect(() => {
-  //   dispatch(fetchGetUsersReports());
-  // }, [dispatch])
 
   function generateMonthlyReportArray(users) {
     const maxMonths = 12;
@@ -55,14 +52,6 @@ console.log('USERS ******************** ', usersReports)
   }
 
   const monthlyReports = generateMonthlyReportArray(usersReports)
-// console.log('MONTHLY REPORTS ARRAY ************************ ', monthlyReports?.map((reports, index) => {
-//   console.log('INDEX, REPORTS', index, reports)
-//   reports.map((report, index) => {
-//     console.log('RRRRRR IIIIIII ===== ', report)
-//   })
-// }));
-
-  
 
   return (
     <div className='sm:w-full md:w-5/6 bg-white mx-auto text-center h-screen overflow-auto'>
@@ -100,9 +89,9 @@ console.log('USERS ******************** ', usersReports)
                 {reports?.map((report, idx) => (
                   <td key={report?.id} className='border border-collapse'>
                     {/* <input type='checkbox' checked={report} readOnly/> */}
-                    <div className='bg-secondary w-4 text-center mx-auto text-secondary'>
+                    <td className='bg-secondary w-4 text-center mx-auto text-secondary'>
                       {report}
-                    </div>
+                    </td>
                   </td>
                 ))}
               </tr>
