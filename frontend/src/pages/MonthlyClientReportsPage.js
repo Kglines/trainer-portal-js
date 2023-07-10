@@ -1,17 +1,20 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetGetUsersReports, fetchGetUsers } from '../store/users';
+import { fetchGetUsersReports, fetchGetUsers } from '../store/users';
 
 const MonthlyClientReportsPage = () => {
   const dispatch = useDispatch();
 
-  const users = useSelector(state => state.users);
+  // const users = useSelector(state => state.users);
   const usersReports = Object.values(useSelector(state => state.users)).slice(2);
 
-  // useEffect(() => {
-  //   dispatch(fetchGetUsers())
+  // const usersReports = useSelector(state => state.users.users)
+console.log('USERS ******************** ', usersReports)
+
+  useEffect(() => {
+    dispatch(fetchGetUsersReports());
     
-  // }, [dispatch]);
+  }, [dispatch]);
   const months = [
     'Jan',
     'Feb',
@@ -27,9 +30,9 @@ const MonthlyClientReportsPage = () => {
     'Dec',
   ];
 
-  useEffect(() => {
-    dispatch(fetGetUsersReports());
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(fetchGetUsersReports());
+  // }, [dispatch])
 
   function generateMonthlyReportArray(users) {
     const maxMonths = 12;
@@ -74,7 +77,7 @@ const MonthlyClientReportsPage = () => {
             </tr>
           </thead>
           <tbody className='border border-collapse'>
-            {usersReports.map((user) => (
+            {usersReports?.map((user) => (
               <tr key={user?.id} className='even:bg-lightGrey border'>
                 {user?.firstname}
               </tr>
@@ -84,7 +87,7 @@ const MonthlyClientReportsPage = () => {
         <table className='border border-collapse'>
           <thead className='border border-collapse'>
             <tr className='border border-collapse'>
-              {months.map((month, idx) => (
+              {months?.map((month, idx) => (
                 <th key={idx} className='px-6 odd:bg-lightGrey border'>
                   {month}
                 </th>
@@ -92,9 +95,9 @@ const MonthlyClientReportsPage = () => {
             </tr>
           </thead>
           <tbody className='border border-collapse'>
-            {monthlyReports.map((reports, index) => (
+            {monthlyReports?.map((reports, index) => (
               <tr className='even:bg-lightGrey border'>
-                {reports.map((report, idx) => (
+                {reports?.map((report, idx) => (
                   <td key={report?.id} className='border border-collapse'>
                     {/* <input type='checkbox' checked={report} readOnly/> */}
                     <div className='bg-secondary w-4 text-center mx-auto text-secondary'>

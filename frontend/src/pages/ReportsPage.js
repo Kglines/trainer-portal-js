@@ -8,7 +8,6 @@ const Reports = () => {
 
   const monthlyClientReports = Object.values(useSelector(state => state.monthlyClientReports))
 
-  console.log('REPORTS === ', monthlyClientReports.length)
 
   useEffect(() => {
     dispatch(fetchGetMonthlyClientReports())
@@ -18,20 +17,27 @@ const Reports = () => {
     <div className='sm:w-full md:w-5/6 bg-white mx-auto text-center min-h-screen pb-2'>
       <div className='flex flex-wrap justify-around align-center mx-4'>
         <Link
-          to='/monthly-client-reports'
-          className='border p-32 mx-auto my-12 shadow-grey shadow-xl hover:scale-105 duration-300'
+          to='/trainers'
+          className='border p-36 mx-12 w-96 my-12 shadow-grey shadow-xl hover:scale-105 duration-300'
         >
-          <h2>Client Reports</h2>
+          Trainers
+        </Link>
+        <Link
+          to='/monthly-client-reports'
+          className='border p-36 mx-12 w-96 my-12 shadow-grey shadow-xl hover:scale-105 duration-300'
+        >
+          <h2>Trainer Reports</h2>
           <p>{monthlyClientReports.length} Reports</p>
         </Link>
-        <div className='border p-32 mx-auto my-12 shadow-grey shadow-xl hover:scale-105 duration-300'>
+        <Link
+          to='/machines'
+          className='border p-36 mx-12 w-96 my-12 shadow-grey shadow-xl hover:scale-105 duration-300'
+        >
+          <h2>Equipment</h2>
+        </Link>
+
+        <div className='border p-36 mx-12 w-96 my-12 shadow-grey shadow-xl hover:scale-105 duration-300'>
           Equipment Reports
-        </div>
-        <div className='border p-32 mx-auto my-12 shadow-grey shadow-xl hover:scale-105 duration-300'>
-          Trainer Reports
-        </div>
-        <div className='border p-32 mx-auto my-12 shadow-grey shadow-xl hover:scale-105 duration-300'>
-          Other Reports
         </div>
       </div>
     </div>

@@ -8,6 +8,7 @@ const { validateSignup } = require('../../utils/validation');
 const router = express.Router();
 
 router.get('', requireAuth, async (req, res) => {
+  
   const users = await User.findAll({
     attributes: [
       'id',
@@ -17,6 +18,9 @@ router.get('', requireAuth, async (req, res) => {
       'email',
       'isAdmin',
       'profileImg'
+    ],
+    order: [
+      ['lastname']
     ]
   });
 
@@ -24,6 +28,7 @@ router.get('', requireAuth, async (req, res) => {
 })
 
 router.get('/monthly-client-reports', requireAuth, async (req, res) => {
+  
   const users = await User.findAll({
     attributes: [
       'id',
@@ -57,7 +62,7 @@ router.get('/monthly-client-reports', requireAuth, async (req, res) => {
   return res;
 };
 
-  console.log('*********************** ', usersGrid())
+  // console.log('*********************** ', usersGrid())
 
   res.json({ users })
 })

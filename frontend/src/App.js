@@ -10,6 +10,9 @@ import Navigation from './components/Navigation';
 import ClientsPage from './pages/ClientsPage';
 import ReportsPage from './pages/ReportsPage';
 import MonthlyClientReportsPage from './pages/MonthlyClientReportsPage';
+import MachineInventoryPage from './pages/MachineInventoryPage';
+import TrainersPage from './pages/TrainersPage';
+import TrainerDetailPage from './pages/TrainerDetailPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -40,6 +43,15 @@ function App() {
           </Route>
           <Route path='/monthly-client-reports' exact>
             <MonthlyClientReportsPage />
+          </Route>
+          <Route path='/machines' exact>
+            <MachineInventoryPage />
+          </Route>
+          <Route path='/trainers' exact>
+            <TrainersPage />
+          </Route>
+          <Route path='/trainers/:trainerId' exact>
+            <TrainerDetailPage />
           </Route>
         </Switch>
       )}

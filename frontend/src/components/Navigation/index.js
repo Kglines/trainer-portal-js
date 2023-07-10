@@ -48,7 +48,7 @@ function Navigation({ isLoaded }) {
   }
 
   return (
-    <nav className='bg-primary w-full h-10'>
+    <nav className='bg-primary w-full h-10 sticky top-0'>
       {sessionUser ? (
         <ul className='flex flex-row color-white justify-around items-center'>
           <div className='flex'>

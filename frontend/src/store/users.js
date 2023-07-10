@@ -19,9 +19,9 @@ export const getUsersReports = (reports) => {
 
 export const fetchGetUsers = () => async (dispatch) => {
     const res = await csrfFetch('/api/users');
+    console.log('* * * * * * * * * * * USERS RES * * * * * ', res)
     if (res.ok) {
         const users = await res.json();
-        console.log('USERS RES THUNK === ', users)
         dispatch(getUsers(users));
         return users;
     };
@@ -29,9 +29,9 @@ export const fetchGetUsers = () => async (dispatch) => {
     return res;
 };
 
-export const fetGetUsersReports = () => async (dispatch) => {
+export const fetchGetUsersReports = () => async (dispatch) => {
     const res = await csrfFetch('/api/users/monthly-client-reports');
-
+console.log('* * * * * * * * * * * USERS RES * * * * * ', res);
     if(res.ok){
         const usersReports = await res.json();
         dispatch(getUsersReports(usersReports));
@@ -47,8 +47,8 @@ const usersReducer = (state = initialState, action) => {
 
     switch(action.type){
         case GET_USERS:
-            action.payload.users.forEach(user => newState[user.id] = user);
-            // newState = action.payload
+            // action.payload.users.forEach(user => newState[user.id] = user);
+            newState = action.payload
             return newState;
         case GET_USERS_REPORTS:
             action.payload.users.forEach(user => newState[user.id] = user);

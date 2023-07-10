@@ -6,13 +6,15 @@ import announcementsReducer from './announcements';
 import clientsReducer from './clients';
 import monthlyClientReportsReducer from './monthlyClientReports';
 import usersReducer from './users';
+import machinesReducer from './machines';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   announcements: announcementsReducer,
   clients: clientsReducer,
   monthlyClientReports: monthlyClientReportsReducer,
-  users: usersReducer
+  users: usersReducer,
+  machines: machinesReducer
 });
 
 let enhancer;
