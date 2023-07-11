@@ -53,6 +53,14 @@ console.log('USERS ******************** ', usersReports)
 
   const monthlyReports = generateMonthlyReportArray(usersReports)
 
+  const reportsClass = (report) => {
+    if(report !== null){
+      return 'bg-secondary text-secondary border-black border-y-2 border-x-2';
+    } else {
+      return 'h-8 border-black border-y-2 border-x-2 odd:bg-lightGrey';
+    }
+  }
+
   return (
     <div className='sm:w-full md:w-5/6 bg-white mx-auto text-center h-screen overflow-auto'>
       <div className='flex flex-col mx-auto xs:w-3/4 md:w-full mb-8'>
@@ -61,13 +69,16 @@ console.log('USERS ******************** ', usersReports)
       <div className='flex lg:justify-center md:w-full'>
         <table>
           <thead className='border border-collapse'>
-            <tr className='border border-collapse'>
+            <tr className='border border-collapse  border-y-2 border-x-2'>
               <th>Trainer</th>
             </tr>
           </thead>
           <tbody className='border border-collapse'>
             {usersReports?.map((user) => (
-              <tr key={user?.id} className='even:bg-lightGrey border'>
+              <tr
+                key={user?.id}
+                className='even:bg-lightGrey border  border-y-2 border-x-2'
+              >
                 {user?.firstname}
               </tr>
             ))}
@@ -77,7 +88,10 @@ console.log('USERS ******************** ', usersReports)
           <thead className='border border-collapse'>
             <tr className='border border-collapse'>
               {months?.map((month, idx) => (
-                <th key={idx} className='px-6 odd:bg-lightGrey border'>
+                <th
+                  key={idx}
+                  className='px-6 odd:bg-lightGrey border  border-y-2 border-x-2'
+                >
                   {month}
                 </th>
               ))}
@@ -85,13 +99,19 @@ console.log('USERS ******************** ', usersReports)
           </thead>
           <tbody className='border border-collapse'>
             {monthlyReports?.map((reports, index) => (
-              <tr className='even:bg-lightGrey border'>
+              <tr className='px-6 even:bg-lightGrey'>
                 {reports?.map((report, idx) => (
-                  <td key={report?.id} className='border border-collapse'>
+                  <td key={report?.id} className={reportsClass(report)}>
                     {/* <input type='checkbox' checked={report} readOnly/> */}
-                    <td className='bg-secondary w-4 text-center mx-auto text-secondary'>
+                    {/* <td
+                      className={
+                        'bg-secondary w-4 text-center mx-auto text-secondary'
+                      }
+                    >
                       {report}
-                    </td>
+                    </td> */}
+                    {console.log('REPORT INSIDE REPORTS === ', report)}
+                    {report}
                   </td>
                 ))}
               </tr>
