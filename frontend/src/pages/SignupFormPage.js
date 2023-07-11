@@ -10,11 +10,14 @@ function SignupFormPage() {
   const [username, setUsername] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [profileImg, setProfileImg] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errors, setErrors] = useState({});
 
-  if (sessionUser) return <Redirect to='/home' />;
+  console.log('SET ADMIN === ', isAdmin)
+  // if (sessionUser) return <Redirect to='/home' />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,10 +44,19 @@ function SignupFormPage() {
     });
   };
 
+  const changeAdmin = () => {
+    setIsAdmin(!isAdmin)
+  }
+
   return (
-    <>
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
+    <div className='w-auto flex flex-col'>
+      <h1 className='text-white bg-primary text-center text-2xl'>
+        Add Trainer
+      </h1>
+      <form
+        onSubmit={handleSubmit}
+        className='w-auto h-96 flex flex-col text-left mx-4'
+      >
         <label>
           Email
           <input
@@ -84,6 +96,25 @@ function SignupFormPage() {
             required
           />
         </label>
+        <label>
+          Trainer Picture
+          <input
+            type='text'
+            value={profileImg}
+            onChange={(e) => setProfileImg(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Admin? 
+          <input
+            type='checkbox'
+            value={isAdmin}
+            checked={isAdmin}
+            onChange={changeAdmin}
+            required
+          />
+        </label>
         {errors.lastName && <p>{errors.lastName}</p>}
         <label>
           Password
@@ -105,9 +136,14 @@ function SignupFormPage() {
           />
         </label>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type='submit'>Sign Up</button>
+        <button
+          type='submit'
+          className='bg-secondary hover:bg-secondaryHover text-white rounded p-2 mx-2'
+        >
+          Submit
+        </button>
       </form>
-    </>
+    </div>
   );
 }
 
