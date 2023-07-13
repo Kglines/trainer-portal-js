@@ -40,7 +40,7 @@ export const fetchCreateClient = (client) => async (dispatch) => {
 
     if(res.ok){
         const client = await res.json();
-        dispatch(getClients(client));
+        dispatch(createClient(client));
         return client;
     };
     return res;

@@ -1,6 +1,7 @@
 import { csrfFetch } from './csrf';
 
 const GET_MACHINES = 'machines/get';
+const CREATE_MACHINES = 'machine/create';
 
 export const getMachines = (machines) => {
     return {
@@ -8,6 +9,13 @@ export const getMachines = (machines) => {
         payload: machines
     };
 };
+
+export const createMachines = (machine) => {
+    return {
+        type: CREATE_MACHINES,
+        payload: machine
+    }
+}
 
 export const fetchGetMachines = () => async (dispatch) => {
     const res = await csrfFetch('/api/machines');
@@ -20,6 +28,21 @@ export const fetchGetMachines = () => async (dispatch) => {
     return res;
 };
 
+export const fetchCreateMachines = (machine) => async (dispatch) => {
+    const res = await csrfFetch('/api/machines', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(machine),
+    });
+
+    if(res.ok){
+        const machine = await res.json();
+        dispatch(createMachines(machine));
+        return machine;
+    }
+    return res;
+}
+
 const initialState = {};
 
 const machinesReducer = (state = initialState, action) => {
@@ -30,6 +53,9 @@ const machinesReducer = (state = initialState, action) => {
             // action.payload.machines.forEach(machine => newState[machine.id] = machine);
             newState = action.payload;
             return newState;
+        case CREATE_MACHINES:
+            newState = { ...state, [action.payload.id]: action.payload };
+            return newState
         default:
             return newState
     }
