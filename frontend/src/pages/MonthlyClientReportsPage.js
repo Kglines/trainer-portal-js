@@ -82,9 +82,11 @@ console.log('USERS ******************** ', usersReports)
             {usersReports?.map((user) => (
               <tr
                 key={user?.id}
-                className='even:bg-lightGrey border  border-y-2 border-x-2'
+                className='even:bg-lightGrey border border-y-2 border-x-2'
               >
-                {user?.firstname}
+                <td className='p-2'>
+                  {user?.lastname},{user?.firstname}
+                </td>
               </tr>
             ))}
           </tbody>

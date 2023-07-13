@@ -26,7 +26,7 @@ const MachineInventoryPage = () => {
       </div>
       <div>
         {machines?.machines?.map((machine) => (
-          <div className='flex px-2'>
+          <div className='flex px-2' key={machine?.id}>
             <p className='px-2'>{machine?.number}</p>
             <p className='px-2'>{machine?.type}</p>
             <p className='px-2'>{machine?.manufacturer}</p>
