@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGetUsersReports } from '../store/users';
 
@@ -47,11 +47,16 @@ console.log('USERS ******************** ', usersReports)
 
       result.push(monthlyReport);
     }
-
+    // console.log('RESULT OF MONTHLY REPORT === ', result)
     return result;
   }
 
+  // const monthlyReports = useMemo(() => {
+  //   generateMonthlyReportArray(usersReports)
+  // }, [usersReports])
   const monthlyReports = generateMonthlyReportArray(usersReports)
+
+  console.log('MONTHLY REPORTS === ', monthlyReports)
 
   const reportsClass = (report) => {
     if(report !== null){
@@ -110,7 +115,7 @@ console.log('USERS ******************** ', usersReports)
                     >
                       {report}
                     </td> */}
-                    {console.log('REPORT INSIDE REPORTS === ', report)}
+                    {/* {console.log('REPORT INSIDE REPORTS === ', report)} */}
                     {report}
                   </td>
                 ))}
