@@ -24,15 +24,50 @@ const MachineInventoryPage = () => {
           className='bg-secondary text-white rounded-md p-2 mt-2 sm:w-full md:w-1/2 mx-auto hover:bg-secondaryHover'
         />
       </div>
-      <div>
-        {machines?.machines?.map((machine) => (
-          <div className='flex px-2' key={machine?.id}>
-            <p className='px-2'>{machine?.number}</p>
-            <p className='px-2'>{machine?.type}</p>
-            <p className='px-2'>{machine?.manufacturer}</p>
-            <p className='px-2'>{machine?.name}</p>
-          </div>
-        ))}
+      <div className='mt-8 mx-2'>
+        <table className='w-full table-auto border border-collapse mb-8 pb-8'>
+          <thead>
+            <tr className='h-12 text-lg'>
+              <th className='px-2 border'>Number</th>
+              <th className='px-2 border'>Type</th>
+              <th className='px-2 border'>Manufacturer</th>
+              <th className='px-2 border'>Name</th>
+              <th className='px-2 border'>
+                <div className='flex justify-around'>
+                  <div>
+                    <i className='fa fa-pencil'></i>
+                  </div>
+                  <div>
+                    <i className='fa fa-trash'></i>
+                  </div>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {machines?.machines?.map((machine) => (
+              <tr
+                className='odd:bg-white even:bg-lightGrey h-12 text-lg'
+                key={machine?.id}
+              >
+                <td className='px-2 border'>{machine?.number}</td>
+                <td className='px-2 border'>{machine?.type}</td>
+                <td className='px-2 border'>{machine?.manufacturer}</td>
+                <td className='px-2 border'>{machine?.name}</td>
+                <td className='px-2 border'>
+                  <div className='flex justify-around'>
+                    <div>
+                      <i className='fa fa-pencil'></i>
+                    </div>
+                    <div>
+                      <i className='fa fa-trash'></i>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

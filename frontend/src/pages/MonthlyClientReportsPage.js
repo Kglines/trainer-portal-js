@@ -1,18 +1,16 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGetUsersReports } from '../store/users';
 
 const MonthlyClientReportsPage = () => {
   const dispatch = useDispatch();
-
-  // const users = useSelector(state => state.users);
+ 
   const usersReports = Object.values(useSelector(state => state.users))
 
-  // const usersReports = useSelector(state => state.users.users)
-console.log('USERS ******************** ', usersReports)
-
   useEffect(() => {
+    
     dispatch(fetchGetUsersReports());
+    
   }, [dispatch]);
 
   const months = [
@@ -34,7 +32,7 @@ console.log('USERS ******************** ', usersReports)
   function generateMonthlyReportArray(users) {
     const maxMonths = 12;
     const result = [];
-
+    
     for (const user of users) {
       const monthlyReport = new Array(maxMonths).fill(null);
 
@@ -47,16 +45,12 @@ console.log('USERS ******************** ', usersReports)
 
       result.push(monthlyReport);
     }
-    // console.log('RESULT OF MONTHLY REPORT === ', result)
+    
     return result;
   }
 
-  // const monthlyReports = useMemo(() => {
-  //   generateMonthlyReportArray(usersReports)
-  // }, [usersReports])
   const monthlyReports = generateMonthlyReportArray(usersReports)
 
-  console.log('MONTHLY REPORTS === ', monthlyReports)
 
   const reportsClass = (report) => {
     if(report !== null){
@@ -109,15 +103,6 @@ console.log('USERS ******************** ', usersReports)
               <tr className='px-6 even:bg-lightGrey'>
                 {reports?.map((report, idx) => (
                   <td key={report?.id} className={reportsClass(report)}>
-                    {/* <input type='checkbox' checked={report} readOnly/> */}
-                    {/* <td
-                      className={
-                        'bg-secondary w-4 text-center mx-auto text-secondary'
-                      }
-                    >
-                      {report}
-                    </td> */}
-                    {/* {console.log('REPORT INSIDE REPORTS === ', report)} */}
                     {report}
                   </td>
                 ))}
