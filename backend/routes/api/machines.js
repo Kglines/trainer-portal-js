@@ -4,7 +4,11 @@ const { requireAuth } = require('../../utils/auth');
 const { Machine } = require('../../db/models');
 
 router.get('', requireAuth, async (req, res) => {
-    const machines = await Machine.findAll();
+    const machines = await Machine.findAll({
+        order: [
+            ['number']
+        ]
+    });
     res.json({ machines });
 })
 

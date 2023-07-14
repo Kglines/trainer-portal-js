@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchGetMachines } from '../store/machines';
 import OpenModalButton from '../components/OpenModalButton';
 import CreateMachine from '../components/CreateMachine';
+import EditMachine from '../components/EditMachine';
+import DeleteMachine from '../components/DeleteMachine';
 
 const MachineInventoryPage = () => {
     const dispatch = useDispatch();
@@ -57,10 +59,18 @@ const MachineInventoryPage = () => {
                 <td className='px-2 border'>
                   <div className='flex justify-around'>
                     <div>
-                      <i className='fa fa-pencil'></i>
+                      <OpenModalButton
+                        modalComponent={<EditMachine machineId={machine?.id} />}
+                        buttonText={
+                          <i className='fa fa-pencil text-secondary'></i>
+                        }
+                      />
                     </div>
                     <div>
-                      <i className='fa fa-trash'></i>
+                      <OpenModalButton
+                        modalComponent={<DeleteMachine machineId={machine?.id}/>}
+                        buttonText={<i className='fa fa-trash text-primary'></i>}
+                      />
                     </div>
                   </div>
                 </td>
