@@ -41,7 +41,6 @@ const EditMachine = ({ machine }) => {
     <form onSubmit={handleSubmit} className='w-auto'>
       <div className='text-white bg-primary text-center text-2xl py-2'>
         <h2>Edit Machine</h2>
-
       </div>
       {validationErrors?.map((error) => (
         <li key={error}>{error}</li>
