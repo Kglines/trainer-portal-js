@@ -60,7 +60,7 @@ const MachineInventoryPage = () => {
                   <div className='flex justify-around'>
                     <div>
                       <OpenModalButton
-                        modalComponent={<EditMachine machineId={machine?.id} />}
+                        modalComponent={<EditMachine machine={machine} />}
                         buttonText={
                           <i className='fa fa-pencil text-secondary'></i>
                         }
