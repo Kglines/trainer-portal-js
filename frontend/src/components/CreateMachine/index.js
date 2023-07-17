@@ -84,7 +84,7 @@ const CreateMachine = () => {
           onChange={(e) => setMachineImg(e.target.value)}
         />
       </div>
-      <div className='text-center my-4'>
+      <div className='text-center my-4 py-6'>
         <button
           // disabled={isDisabled()}
           className='bg-primary hover:bg-primaryHover text-white rounded p-2 mx-2 disabled:bg-disabledPrimary'

@@ -10,13 +10,13 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Machine.hasMany(models.Maintenance, { foreignKey: 'machineId' })
     }
   }
   Machine.init({
     number: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
     },
     type: {
       type: DataTypes.STRING,
