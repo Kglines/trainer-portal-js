@@ -6,6 +6,7 @@ const announcementsRouter = require('./announcements.js');
 const clientsRouter = require('./clients.js');
 const monthlyClientReportRouter = require('./monthlyClientReport.js');
 const machineRouter = require('./machines.js');
+const maintenanceRouter = require('./maintenance.js');
 const { restoreUser } = require('../../utils/auth.js');
 
 router.use(restoreUser);
@@ -15,7 +16,8 @@ router.use('/users', usersRouter);
 router.use('/announcements', announcementsRouter);
 router.use('/clients', clientsRouter);
 router.use('/monthly-client-reports', monthlyClientReportRouter);
-router.use('/machines', machineRouter)
+router.use('/machines', machineRouter);
+router.use('/maintenance', maintenanceRouter);
 
 router.post('/test', function (req, res) {
   res.json({ requestBody: req.body });
