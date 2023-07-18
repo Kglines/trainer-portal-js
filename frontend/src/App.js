@@ -13,6 +13,7 @@ import MonthlyClientReportsPage from './pages/MonthlyClientReportsPage';
 import MachineInventoryPage from './pages/MachineInventoryPage';
 import TrainersPage from './pages/TrainersPage';
 import TrainerDetailPage from './pages/TrainerDetailPage';
+import MaintenanceLogPage from './pages/MaintenanceLogPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +53,9 @@ function App() {
           </Route>
           <Route path='/trainers/:trainerId' exact>
             <TrainerDetailPage />
+          </Route>
+          <Route path='/maintenance' exact>
+            <MaintenanceLogPage />
           </Route>
         </Switch>
       )}
