@@ -8,7 +8,7 @@ import HomePage from './pages/HomePage';
 import * as sessionActions from './store/session';
 import Navigation from './components/Navigation';
 import ClientsPage from './pages/ClientsPage';
-import ReportsPage from './pages/ReportsPage';
+import DashboardPage from './pages/DashboardPage';
 import MonthlyClientReportsPage from './pages/MonthlyClientReportsPage';
 import MachineInventoryPage from './pages/MachineInventoryPage';
 import TrainersPage from './pages/TrainersPage';
@@ -38,8 +38,8 @@ function App() {
           <Route path='/clients' exact>
             <ClientsPage />
           </Route>
-          <Route path='/reports' exact>
-            <ReportsPage />
+          <Route path='/dashboard' exact>
+            <DashboardPage />
           </Route>
           <Route path='/monthly-client-reports' exact>
             <MonthlyClientReportsPage />

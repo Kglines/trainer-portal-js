@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { requireAuth } = '../../utils/auth';
-const { Maintenance } = '../../db/models/';
+const { requireAuth } = require('../../utils/auth');
+const { Maintenance } = require('../../db/models/');
 
 // Get all maintenance reports
 router.get('', requireAuth, async (req, res) => {

@@ -7,6 +7,7 @@ import clientsReducer from './clients';
 import monthlyClientReportsReducer from './monthlyClientReports';
 import usersReducer from './users';
 import machinesReducer from './machines';
+import maintenanceReducer from './maintenance';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   clients: clientsReducer,
   monthlyClientReports: monthlyClientReportsReducer,
   users: usersReducer,
-  machines: machinesReducer
+  machines: machinesReducer,
+  maintenance: maintenanceReducer
 });
 
 let enhancer;

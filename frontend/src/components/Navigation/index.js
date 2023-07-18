@@ -52,6 +52,17 @@ function Navigation({ isLoaded }) {
       {sessionUser ? (
         <ul className='flex flex-row color-white justify-around items-center'>
           <div className='flex'>
+            {sessionUser.isAdmin && (
+              <li className='text-white mt-2'>
+                <NavLink
+                  exact
+                  to='/dashboard'
+                  className='text-white mx-4 hover:outline px-2'
+                >
+                  Dashboard
+                </NavLink>
+              </li>
+            )}
             <li className='text-white mt-2'>
               <NavLink
                 exact
@@ -70,15 +81,6 @@ function Navigation({ isLoaded }) {
                 Clients
               </NavLink>
             </li>
-            {sessionUser.isAdmin && <li className='text-white mt-2'>
-              <NavLink
-                exact
-                to='/reports'
-                className='text-white mx-4 hover:outline px-2'
-              >
-                Reports
-              </NavLink>
-            </li>}
           </div>
           {isLoaded && sessionLinks}
         </ul>
