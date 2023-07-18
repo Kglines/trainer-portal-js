@@ -55,9 +55,8 @@ function Navigation({ isLoaded }) {
             {sessionUser.isAdmin && (
               <li className='text-white mt-2'>
                 <NavLink
-                  exact
                   to='/dashboard'
-                  className='text-white mx-4 hover:outline px-2'
+                  className='text-white mx-4 hover:outline px-2 [&.active]:outline [&.active]:outline-secondary'
                 >
                   Dashboard
                 </NavLink>
@@ -65,20 +64,26 @@ function Navigation({ isLoaded }) {
             )}
             <li className='text-white mt-2'>
               <NavLink
-                exact
-                to='/'
-                className='text-white mx-4 hover:outline px-2'
+                to='/home'
+                className='text-white mx-4 hover:outline px-2 [&.active]:outline [&.active]:outline-secondary'
               >
                 Home
               </NavLink>
             </li>
             <li className='text-white mt-2'>
               <NavLink
-                exact
                 to='/clients'
-                className='text-white mx-4 hover:outline px-2'
+                className='text-white mx-4 hover:outline px-2 [&.active]:outline [&.active]:outline-secondary'
               >
                 Clients
+              </NavLink>
+            </li>
+            <li className='text-white mt-2'>
+              <NavLink
+                to='/maintenance'
+                className='text-white mx-4 hover:outline px-2 [&.active]:outline [&.active]:outline-secondary'
+              >
+                Maintenance Log
               </NavLink>
             </li>
           </div>
