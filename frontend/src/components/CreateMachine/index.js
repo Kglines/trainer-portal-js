@@ -14,7 +14,7 @@ const CreateMachine = () => {
   const [name, setName] = useState('');
   const [machineImg, setMachineImg] = useState('');
   const [validationErrors, setValidationErrors] = useState([]);
-
+console.log('ERRORS === ', validationErrors)
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -44,9 +44,11 @@ const CreateMachine = () => {
           Add Machine
         </h2>
       </div>
-      {validationErrors.map((error) => (
-        <li key={error}>{error}</li>
-      ))}
+      <ul>
+        {/* {validationErrors?.map((error) => (
+          <li key={error}>{error}</li>
+        ))} */}
+      </ul>
       <div className='my-4 p-4 flex flex-col h-56'>
         <input
           className='bg-lightGrey my-2 h-12 text-xl mx-2 w-64 px-3'
@@ -55,6 +57,7 @@ const CreateMachine = () => {
           value={number}
           onChange={(e) => setNumber(e.target.value)}
         />
+        <div className='text-red mx-2'>{validationErrors.number}</div>
         <input
           className='bg-lightGrey my-2 h-12 text-xl mx-2 w-64 px-3'
           type='text'

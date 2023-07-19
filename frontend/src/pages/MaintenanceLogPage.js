@@ -26,6 +26,7 @@ const MaintenanceLogPage = () => {
           <thead>
             <tr>
               <th className='px-2 border'>Machine #</th>
+              <th className='px-2 border'>Machine Name</th>
               <th className='px-2 border'>Problem</th>
               <th className='px-2 border'>Description</th>
               <th className='px-2 border'>Pending</th>
@@ -37,6 +38,7 @@ const MaintenanceLogPage = () => {
             {problems?.map((problem) => (
               <tr key={problem?.id}>
                 <td className='px-2 border'>{problem?.Machine?.number}</td>
+                <td className='px-2 border'>{problem?.Machine?.name}</td>
                 <td className='px-2 border'>{problem?.title}</td>
                 <td className='px-2 border'>{problem?.description}</td>
                 <td className='px-2 border' type='checkbox'>

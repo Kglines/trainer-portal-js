@@ -32,7 +32,7 @@ const MonthlyClientReportsPage = () => {
   function generateMonthlyReportArray(users) {
     const maxMonths = 12;
     const result = [];
-    
+    console.log('USERS === ', users)
     for (const user of users) {
       const monthlyReport = new Array(maxMonths).fill(null);
 
@@ -49,7 +49,9 @@ const MonthlyClientReportsPage = () => {
     return result;
   }
 
-  const monthlyReports = generateMonthlyReportArray(usersReports)
+  const monthlyReports = generateMonthlyReportArray(usersReports);
+
+  console.log('CLIENT REPORTS ==== ', monthlyReports)
 
 
   const reportsClass = (report) => {

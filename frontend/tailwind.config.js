@@ -12,6 +12,7 @@ module.exports = {
       white: 'rgb(256, 256, 256)',
       black: 'rgb(0, 0, 0)',
       lightGrey: 'rgb(240, 240, 240)',
+      red: 'rgb(255, 0, 0)'
     },
   },
   plugins: [],
