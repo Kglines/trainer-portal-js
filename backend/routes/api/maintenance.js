@@ -2,10 +2,14 @@ const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../utils/auth');
 const { Maintenance } = require('../../db/models/');
-
+const { Machine } = require ('../../db/models');
 // Get all maintenance reports
 router.get('', requireAuth, async (req, res) => {
-    const maintenance = await Maintenance.findAll()
+    const maintenance = await Maintenance.findAll({
+      include: {
+        model: Machine
+      }
+    })
     res.json({ maintenance });
 })
 

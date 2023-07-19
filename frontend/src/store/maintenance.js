@@ -42,10 +42,11 @@ export const deleteMaintenance = (maintenance) => {
 // GET
 export const fetchGetMaintenance = () => async (dispatch) => {
     const res = await csrfFetch('/api/maintenance');
-
+console.log('MAINT RES ==== ', res)
     if(res.ok){
         const maintenance = await res.json();
-        dispatch(getMaintenance());
+        dispatch(getMaintenance(maintenance));
+        console.log('RES PROBLEMS === ', maintenance)
         return maintenance;
     };
     return res;
@@ -106,6 +107,7 @@ const maintenanceReducer = (state = initialState, action) => {
     switch(action.type){
         case GET_MAINTENANCE:
             action.payload.maintenance.forEach(maintenance => newState[maintenance.id] = maintenance);
+            // newState = action.payload;
             return newState;
         case CREATE_MAINTENANCE:
             newState = { ...state, [action.payload.id]: action.payload };

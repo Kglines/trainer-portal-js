@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf';
 
 // Action Variables
 const GET_MACHINES = 'machines/get';
+const GET_PROBLEM_MACHINES = 'machineProblems/get';
 const CREATE_MACHINES = 'machine/create';
 const UPDATE_MACHINES = 'machine/update';
 const DELETE_MACHINE = 'machine/delete';
@@ -14,6 +15,14 @@ export const getMachines = (machines) => {
         payload: machines
     };
 };
+
+// GET Machines with Maintenance problems
+export const getProblemMachines = (machines) => {
+    return {
+        type: GET_PROBLEM_MACHINES,
+        payload: machines
+    }
+}
 
 // Create/POST
 export const createMachines = (machine) => {
@@ -51,6 +60,17 @@ export const fetchGetMachines = () => async (dispatch) => {
     };
     return res;
 };
+
+export const fetchGetProblemMachines = () => async (dispatch) => {
+    const res = await csrfFetch('/api/machines/maintenance');
+
+    if(res.ok){
+        const machines = await res.json();
+        dispatch(getProblemMachines(machines));
+        return machines;
+    };
+    return res;
+}
 
 // Create a machine
 export const fetchCreateMachines = (machine) => async (dispatch) => {
@@ -104,22 +124,26 @@ const initialState = {};
 const machinesReducer = (state = initialState, action) => {
     let newState = { ...state };
 
-    switch(action.type){
-        case GET_MACHINES:
-            // action.payload.machines.forEach(machine => newState[machine.id] = machine);
-            newState = action.payload;
-            return newState;
-        case CREATE_MACHINES:
-            newState = { ...state, [action.payload.id]: action.payload };
-            return newState
-        case UPDATE_MACHINES:
-            newState = action.payload;
-            return newState;
-        case DELETE_MACHINE:
-            delete newState[action.payload];
-            return newState;
-        default:
-            return newState
+    switch (action.type) {
+      case GET_MACHINES:
+        // action.payload.machines.forEach(machine => newState[machine.id] = machine);
+        newState = action.payload;
+        return newState;
+      case GET_PROBLEM_MACHINES:
+        // action.payload.machines.forEach(machine => newState[machine.id] = machine);
+        newState = action.payload;
+        return newState;
+      case CREATE_MACHINES:
+        newState = { ...state, [action.payload.id]: action.payload };
+        return newState;
+      case UPDATE_MACHINES:
+        newState = action.payload;
+        return newState;
+      case DELETE_MACHINE:
+        delete newState[action.payload];
+        return newState;
+      default:
+        return newState;
     }
 }
 
