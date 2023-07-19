@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGetUsersReports } from '../store/users';
 
@@ -100,7 +100,7 @@ const MonthlyClientReportsPage = () => {
           </thead>
           <tbody className='border border-collapse'>
             {monthlyReports?.map((reports, index) => (
-              <tr className='px-6 even:bg-lightGrey'>
+              <tr key={index} className='px-6 even:bg-lightGrey'>
                 {reports?.map((report, idx) => (
                   <td key={report?.id} className={reportsClass(report)}>
                     {report}

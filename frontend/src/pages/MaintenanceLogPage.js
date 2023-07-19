@@ -35,7 +35,7 @@ const MaintenanceLogPage = () => {
           </thead>
           <tbody>
             {problems?.map((problem) => (
-              <tr>
+              <tr key={problem?.id}>
                 <td className='px-2 border'>{problem?.Machine?.number}</td>
                 <td className='px-2 border'>{problem?.title}</td>
                 <td className='px-2 border'>{problem?.description}</td>
