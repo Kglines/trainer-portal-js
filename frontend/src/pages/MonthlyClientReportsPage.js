@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGetUsersReports } from '../store/users';
 
@@ -32,14 +32,19 @@ const MonthlyClientReportsPage = () => {
   function generateMonthlyReportArray(users) {
     const maxMonths = 12;
     const result = [];
-    console.log('USERS === ', users)
+    
+    // Loop through users and create a new array with null for each month
     for (const user of users) {
       const monthlyReport = new Array(maxMonths).fill(null);
 
+      // Loop through reports
       for (const report of user?.MonthlyClientReports) {
+        // If there's a report for the month
         const month = report?.month;
-        const index = month - 1; // Adjust for zero-indexed array
+        // Adjust for zero-indexed array
+        const index = month - 1; 
 
+        // Assign the month value at the index
         monthlyReport[index] = month;
       }
 
@@ -50,8 +55,6 @@ const MonthlyClientReportsPage = () => {
   }
 
   const monthlyReports = generateMonthlyReportArray(usersReports);
-
-  console.log('CLIENT REPORTS ==== ', monthlyReports)
 
 
   const reportsClass = (report) => {
@@ -68,50 +71,50 @@ const MonthlyClientReportsPage = () => {
         <h2 className='text-3xl pt-12'>Monthly Client Reports</h2>
       </div>
       <div className='flex lg:justify-center md:w-full'>
-        <table>
-          <thead className='border border-collapse'>
-            <tr className='border border-collapse  border-y-2 border-x-2'>
-              <th>Trainer</th>
-            </tr>
-          </thead>
-          <tbody className='border border-collapse'>
-            {usersReports?.map((user) => (
-              <tr
-                key={user?.id}
-                className='even:bg-lightGrey border border-y-2 border-x-2'
-              >
-                <td className='p-2'>
-                  {user?.lastname},{user?.firstname}
-                </td>
+          <table>
+            <thead className='border border-collapse'>
+              <tr className='border border-collapse  border-y-2 border-x-2'>
+                <th>Trainer</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-        <table className='border border-collapse'>
-          <thead className='border border-collapse'>
-            <tr className='border border-collapse'>
-              {months?.map((month, idx) => (
-                <th
-                  key={idx}
-                  className='px-6 odd:bg-lightGrey border  border-y-2 border-x-2'
+            </thead>
+            <tbody className='border border-collapse'>
+              {usersReports?.map((user) => (
+                <tr
+                  key={user?.id}
+                  className='even:bg-lightGrey border border-y-2 border-x-2'
                 >
-                  {month}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className='border border-collapse'>
-            {monthlyReports?.map((reports, index) => (
-              <tr key={index} className='px-6 even:bg-lightGrey'>
-                {reports?.map((report, idx) => (
-                  <td key={report?.id} className={reportsClass(report)}>
-                    {report}
+                  <td className='p-2'>
+                    {user?.lastname},{" "}{user?.firstname}
                   </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <table className='border border-collapse'>
+            <thead className='border border-collapse'>
+              <tr className='border border-collapse'>
+                {months?.map((month, idx) => (
+                  <th
+                    key={idx}
+                    className='px-6 odd:bg-lightGrey border  border-y-2 border-x-2'
+                  >
+                    {month}
+                  </th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className='border border-collapse'>
+              {monthlyReports?.map((reports, index) => (
+                <tr key={index} className='px-6 even:bg-lightGrey'>
+                  {reports?.map((report) => (
+                    <td key={report?.id} className={reportsClass(report)}>
+                      {report}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
       </div>
     </div>
   );

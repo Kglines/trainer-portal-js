@@ -28,7 +28,7 @@ module.exports = {
       },
       {
         machineId: 17,
-        userId: 2,
+        userId: 3,
         title: 'Grip',
         description: 'Grip is coming off.',
         isPending: true,
@@ -52,7 +52,7 @@ module.exports = {
       },
       {
         machineId: 19,
-        userId: 2,
+        userId: 3,
         title: 'Vinyl ripped',
         description: 'The vinyl on the seat back is ripped.',
         isPending: true,

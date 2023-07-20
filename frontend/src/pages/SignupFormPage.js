@@ -2,21 +2,27 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import * as sessionActions from '../store/session';
+import { useModal } from '../context/Modal';
+import { fetchGetUsers } from '../store/users';
 
 function SignupFormPage() {
   const dispatch = useDispatch();
+
+  const { closeModal } = useModal();
+
   const sessionUser = useSelector((state) => state.session.user);
+  
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
   const [profileImg, setProfileImg] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errors, setErrors] = useState({});
 
-  console.log('SET ADMIN === ', isAdmin)
+  // console.log('SET ADMIN === ', isAdmin)
   // if (sessionUser) return <Redirect to='/home' />;
 
   const handleSubmit = (e) => {
@@ -27,11 +33,17 @@ function SignupFormPage() {
         sessionActions.signup({
           email,
           username,
-          firstName,
-          lastName,
+          firstname,
+          lastname,
+          isAdmin,
           password,
         })
-      ).catch(async (res) => {
+      )
+      .then(() => {
+        closeModal()
+        dispatch(fetchGetUsers())
+      })
+      .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) {
           setErrors(data.errors);
@@ -81,18 +93,18 @@ function SignupFormPage() {
           First Name
           <input
             type='text'
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
+            value={firstname}
+            onChange={(e) => setFirstname(e.target.value)}
             required
           />
         </label>
-        {errors.firstName && <p>{errors.firstName}</p>}
+        {errors.firstname && <p>{errors.firstname}</p>}
         <label>
           Last Name
           <input
             type='text'
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            value={lastname}
+            onChange={(e) => setLastname(e.target.value)}
             required
           />
         </label>
@@ -112,7 +124,6 @@ function SignupFormPage() {
             value={isAdmin}
             checked={isAdmin}
             onChange={changeAdmin}
-            required
           />
         </label>
         {errors.lastName && <p>{errors.lastName}</p>}

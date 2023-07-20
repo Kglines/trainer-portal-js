@@ -1,21 +1,31 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchGetMachines } from '../store/machines';
+import { fetchGetMachines, fetchGetProblemMachines } from '../store/machines';
 import OpenModalButton from '../components/OpenModalButton';
 import CreateMachine from '../components/CreateMachine';
 import EditMachine from '../components/EditMachine';
 import DeleteMachine from '../components/DeleteMachine';
+import { fetchGetMaintenance } from '../store/maintenance';
 
 const MachineInventoryPage = () => {
     const dispatch = useDispatch();
 
     const machines = useSelector(state => state.machines);
+    const maintenance = Object.values(useSelector(state => state.maintenance));
+console.log('MAINTENANCE === ', machines)
+    useEffect(() => {
+      dispatch(fetchGetMaintenance())
+    }, [dispatch])
 
     console.log(machines)
 
     useEffect(() => {
-        dispatch(fetchGetMachines())
+      dispatch(fetchGetProblemMachines())
     }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(fetchGetMachines())
+    // }, [dispatch])
+
   return (
     <div className='sm:w-full md:w-5/6 bg-white mx-auto text-center min-h-screen pb-2'>
       <div className='flex flex-col mx-auto xs:w-3/4 md:w-64 lg:w-80'>
@@ -34,6 +44,7 @@ const MachineInventoryPage = () => {
               <th className='px-2 border'>Type</th>
               <th className='px-2 border'>Manufacturer</th>
               <th className='px-2 border'>Name</th>
+              <th className='px-2 border'># Maintenance Issues</th>
               <th className='px-2 border'>
                 <div className='flex justify-around'>
                   <div>
@@ -56,6 +67,7 @@ const MachineInventoryPage = () => {
                 <td className='px-2 border'>{machine?.type}</td>
                 <td className='px-2 border'>{machine?.manufacturer}</td>
                 <td className='px-2 border'>{machine?.name}</td>
+                <td className='px-2 border'>{machine?.Maintenances.length}</td>
                 <td className='px-2 border'>
                   <div className='flex justify-around'>
                     <div>

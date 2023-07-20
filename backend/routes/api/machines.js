@@ -21,10 +21,10 @@ router.get('/maintenance', requireAuth, async (req, res) => {
     const machines = await Machine.findAll({
         include: {
             model: Maintenance,
-            where: {
-                isPending: true,
-                isFixed: false
-            }
+            // where: {
+            //     isPending: true,
+            //     isFixed: false
+            // }
         },
         
     })

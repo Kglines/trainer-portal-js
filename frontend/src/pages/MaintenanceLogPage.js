@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchGetProblemMachines } from '../store/machines';
 import { fetchGetMaintenance } from '../store/maintenance';
+import OpenModalButton from '../components/OpenModalButton';
+import CreateMaintenance from '../components/CreateMaintenance';
 
 const MaintenanceLogPage = () => {
   const dispatch = useDispatch();
 
-  // const machines = Object.values(useSelector(state => state.machines));
-
   const problems = Object.values(useSelector(state => state.maintenance))
+  const sessionUser = useSelector(state => state.session.user);
 
   console.log('PROBLEMS === ', problems)
+  
   useEffect(() => {
-    // dispatch(fetchGetProblemMachines())
     dispatch(fetchGetMaintenance());
   }, [dispatch]);
 
@@ -20,6 +20,7 @@ const MaintenanceLogPage = () => {
     <div className='sm:w-full md:w-5/6 bg-white mx-auto text-center min-h-screen pb-2'>
       <div className='flex flex-col mx-auto xs:w-3/4 md:w-64 lg:w-80'>
         <h2 className='text-3xl pt-12'>Maintenance Log</h2>
+        <OpenModalButton modalComponent={<CreateMaintenance />} buttonText='Add Entry' className='bg-secondary text-white rounded-md p-2 mt-2 sm:w-full md:w-5/6 mx-auto hover:bg-secondaryHover' />
       </div>
       <div className='sm:w-full md:w-2/3 mx-auto mt-8 mb-12 pb-12'>
         <table>
@@ -32,20 +33,27 @@ const MaintenanceLogPage = () => {
               <th className='px-2 border'>Pending</th>
               <th className='px-2 border'>Fixed</th>
               <th className='px-2 border'>Date Fixed</th>
+              <th className='px-2 border'>Edit</th>
             </tr>
           </thead>
           <tbody>
             {problems?.map((problem) => (
               <tr key={problem?.id}>
-                <td className='px-2 border'>{problem?.Machine?.number}</td>
+                {console.log('MACHINE PROBLEMS === ', problem?.Machine)}
+                <td className='px-2 border'>{problem?.machineId}</td>
                 <td className='px-2 border'>{problem?.Machine?.name}</td>
                 <td className='px-2 border'>{problem?.title}</td>
                 <td className='px-2 border'>{problem?.description}</td>
                 <td className='px-2 border' type='checkbox'>
-                  {problem?.isPending}
+                  {problem?.isPending ? 'Yes' : 'No'}
                 </td>
-                <td className='px-2 border'>{problem?.isFixed}</td>
-                <td className='px-2 border'>{}</td>
+                <td className='px-2 border'>
+                  {problem?.isFixed ? 'Yes' : 'No'}
+                </td>
+                <td className='px-2 border'>
+                  {problem.updatedAt ? problem.updatedAt : ''}
+                </td>
+                <td className='px-2 border'>EDIT</td>
               </tr>
             ))}
           </tbody>
