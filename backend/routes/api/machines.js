@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../utils/auth');
-const { Machine } = require('../../db/models');
+const { Machine, sequelize } = require('../../db/models');
 const { Maintenance } = require('../../db/models');
 const { Op } = require('sequelize');
 
@@ -28,8 +28,13 @@ router.get('/maintenance', requireAuth, async (req, res) => {
         },
         
     })
-    console.log('******************** ', machines)
-    res.json({ machines })
+    const count = await Machine.count({
+        // include: {
+        //     model: Maintenance
+        // }
+    })
+    // console.log('******************** ', machines.Maintenance.count())
+    res.json({ machines, count })
 })
 
 // Create a machine

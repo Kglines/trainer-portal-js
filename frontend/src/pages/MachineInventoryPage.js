@@ -17,7 +17,7 @@ console.log('MAINTENANCE === ', machines)
       dispatch(fetchGetMaintenance())
     }, [dispatch])
 
-    console.log(machines)
+    // console.log(machines)
 
     useEffect(() => {
       dispatch(fetchGetProblemMachines())
@@ -67,7 +67,7 @@ console.log('MAINTENANCE === ', machines)
                 <td className='px-2 border'>{machine?.type}</td>
                 <td className='px-2 border'>{machine?.manufacturer}</td>
                 <td className='px-2 border'>{machine?.name}</td>
-                <td className='px-2 border'>{machine?.Maintenances.length}</td>
+                <td className='px-2 border'>{machine?.Maintenances.length ? machine?.Maintenances.length : 0}</td>
                 <td className='px-2 border'>
                   <div className='flex justify-around'>
                     <div>

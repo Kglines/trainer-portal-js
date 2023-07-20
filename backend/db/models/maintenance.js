@@ -50,5 +50,6 @@ module.exports = (sequelize, DataTypes) => {
       modelName: 'Maintenance',
     }
   );
+  // const count = Maintenance.count()
   return Maintenance;
 };
