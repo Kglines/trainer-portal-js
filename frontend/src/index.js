@@ -8,6 +8,7 @@ import configureStore from './store';
 import { restoreCSRF, csrfFetch } from './store/csrf';
 import * as sessionActions from './store/session';
 import { ModalProvider, Modal } from './context/Modal';
+import PacmanLoader from 'react-spinners/PacmanLoader';
 
 const store = configureStore();
 
@@ -20,7 +21,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 function Root() {
   return (
-    <Suspense fallback={<h2>Loading...</h2>}>
+    <Suspense fallback={<PacmanLoader color='primary' size={150} aria-label="Pacman Loader" />}>
       <ModalProvider>
         <Provider store={store}>
           <BrowserRouter>

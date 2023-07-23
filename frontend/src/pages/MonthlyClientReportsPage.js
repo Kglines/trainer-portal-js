@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGetUsersReports } from '../store/users';
+import PacmanLoader from 'react-spinners/PacmanLoader';
 
 const MonthlyClientReportsPage = () => {
   const dispatch = useDispatch();
-
-  const [isLoading, setIsLoading] = useState(false)
  
   const usersReports = Object.values(useSelector(state => state.users))
 
   useEffect(() => {
     
     dispatch(fetchGetUsersReports())
-      // .then(() => {
-      //   generateMonthlyReportArray(usersReports);
-      // })
     
-  }, [dispatch, usersReports]);
+  }, [dispatch]);
 
   const months = [
     'Jan',
@@ -71,15 +67,15 @@ const MonthlyClientReportsPage = () => {
     }
   }
 
+  if(usersReports.length === 0) return <PacmanLoader size={150} color='primary' title='No Reports' />
+
   return (
     <div className='sm:w-full md:w-5/6 bg-white mx-auto text-center h-screen overflow-auto'>
       <div className='flex flex-col mx-auto xs:w-3/4 md:w-full mb-8'>
         <h2 className='text-3xl pt-12'>Monthly Client Reports</h2>
       </div>
       <div className='flex lg:justify-center md:w-full'>
-        {/* {isLoading ? <h2>Loading...</h2> :  */}
-          <>
-
+         <>
           <table>
             <thead className='border border-collapse'>
               <tr className='border border-collapse  border-y-2 border-x-2'>
@@ -125,7 +121,6 @@ const MonthlyClientReportsPage = () => {
             </tbody>
           </table>
           </>
-        {/* } */}
       </div>
     </div>
   );
