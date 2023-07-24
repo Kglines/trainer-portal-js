@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGetUsersReports } from '../store/users';
 import PacmanLoader from 'react-spinners/PacmanLoader';
@@ -55,9 +55,11 @@ const MonthlyClientReportsPage = () => {
     return result;
   }
 
-  // setIsLoading(true);
-  const monthlyReports = generateMonthlyReportArray(usersReports);
-  // setIsLoading(false);
+  
+  const monthlyReports = useMemo(() => {
+    return generateMonthlyReportArray(usersReports)
+  }, [usersReports]);
+  
 
   const reportsClass = (report) => {
     if(report !== null){
