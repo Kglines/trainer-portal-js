@@ -27,6 +27,13 @@ router.get('', requireAuth, async (req, res) => {
   res.json({ users });
 })
 
+router.get('/:userId', requireAuth, async (req, res) => {
+  const { userId } = req.params;
+  const user = await User.findByPk(userId)
+
+  res.json({ user });
+})
+
 router.get('/monthly-client-reports', requireAuth, async (req, res) => {
   
   const users = await User.findAll({

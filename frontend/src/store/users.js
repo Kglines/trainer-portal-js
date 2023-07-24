@@ -1,12 +1,20 @@
 import { csrfFetch } from "./csrf";
 
 const GET_USERS = 'users/get';
+const GET_A_USER = 'user/get';
 const GET_USERS_REPORTS = 'usersReports/get';
 
 export const getUsers = (users) => {
     return {
         type: GET_USERS,
         payload: users
+    };
+};
+
+export const getAUser = (user) => {
+    return {
+        type: GET_A_USER,
+        payload: user
     };
 };
 
@@ -26,6 +34,17 @@ export const fetchGetUsers = () => async (dispatch) => {
         return users;
     };
 
+    return res;
+};
+
+export const fetchGetAUser = (userId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/users/${userId}`)
+
+    if(res.ok){
+        const user = await res.json();
+        dispatch(getAUser(user));
+        return user;
+    };
     return res;
 };
 
@@ -49,6 +68,9 @@ const usersReducer = (state = initialState, action) => {
         case GET_USERS:
             // action.payload.users.forEach(user => newState[user.id] = user);
             newState = action.payload
+            return newState;
+        case GET_A_USER:
+            newState = action.payload;
             return newState;
         case GET_USERS_REPORTS:
             action.payload.users.forEach(user => newState[user.id] = user);
