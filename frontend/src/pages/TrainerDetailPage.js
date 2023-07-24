@@ -19,6 +19,11 @@ console.log('TRAINER === ', trainer)
         <h2 className='text-3xl pt-12'>
           {trainer?.firstname} {trainer?.lastname}
         </h2>
+        <img
+          className='w-96 mt-4 rounded-full object-contain shadow-2xl shadow-gray'
+          src={trainer?.profileImg}
+          alt={trainer?.username}
+        />
       </div>
     </div>
   );
