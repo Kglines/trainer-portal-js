@@ -14,6 +14,7 @@ import MachineInventoryPage from './pages/MachineInventoryPage';
 import TrainersPage from './pages/TrainersPage';
 import TrainerDetailPage from './pages/TrainerDetailPage';
 import MaintenanceLogPage from './pages/MaintenanceLogPage';
+import EquipmentReports from './pages/EquipmentReports';
 
 function App() {
   const dispatch = useDispatch();
@@ -56,6 +57,9 @@ function App() {
           </Route>
           <Route path='/maintenance' exact>
             <MaintenanceLogPage />
+          </Route>
+          <Route path='/equipment-reports' exact>
+            <EquipmentReports />
           </Route>
         </Switch>
       )}

@@ -1,12 +1,30 @@
 const express = require('express');
 const router = express.Router();
-const { MonthlyClientReport } = require('../../db/models');
+const { MonthlyClientReport, User } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
 
+// router.get('', requireAuth, async (req, res) => {
+//     const monthlyClientReports = await MonthlyClientReport.findAll();
+//     const count = monthlyClientReports.length
+//     res.json({monthlyClientReports, count})
+// })
+
 router.get('', requireAuth, async (req, res) => {
-    const monthlyClientReports = await MonthlyClientReport.findAll();
-    const count = monthlyClientReports.length
-    res.json({monthlyClientReports, count})
+    const usersReports = await User.findAll({
+        order: [
+            ['lastname']
+        ],
+        include: [
+            {
+                model: MonthlyClientReport
+            }
+        ],
+        where: {
+            isAdmin: false
+        },
+        
+    })
+    res.json({ usersReports });
 })
 
 router.post('', requireAuth, async (req, res) => {

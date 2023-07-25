@@ -2,17 +2,31 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGetUsersReports } from '../store/users';
 import PacmanLoader from 'react-spinners/PacmanLoader';
+import { fetchGetMonthlyClientReports } from '../store/monthlyClientReports';
 
 const MonthlyClientReportsPage = () => {
   const dispatch = useDispatch();
- 
-  const usersReports = Object.values(useSelector(state => state.users))
 
+  const [validationErrors, setValidationErrors] = useState([])
+ 
+  // const usersReports = Object.values(useSelector(state => state.users))
+  const usersReports = Object.values(useSelector(state => state.monthlyClientReports))
+  // const usersReports = useSelector(state => state.monthlyClientReports)
+  console.log('USERS REPORTS === ', usersReports)
   useEffect(() => {
+    console.log('FETCH')
+    dispatch(fetchGetMonthlyClientReports())
+    console.log('GOT IT')
+  }, [dispatch])
+
+  // useEffect(() => {
     
-    dispatch(fetchGetUsersReports())
+  //   dispatch(fetchGetUsersReports()).catch(async (res) => {
+  //     const data = await res.json();
+  //     if (data && data.errors) setValidationErrors(data.errors);
+  //   });
     
-  }, [dispatch]);
+  // }, [dispatch]);
 
   const months = [
     'Jan',
@@ -77,8 +91,11 @@ const MonthlyClientReportsPage = () => {
         <h2 className='text-3xl pt-12'>Monthly Client Reports</h2>
       </div>
       <div className='flex lg:justify-center md:w-full'>
-         <>
-          <table>
+        {validationErrors?.map((error) => (
+          <li key={error}>{error}</li>
+        ))}
+        <>
+          <table className='border border-collapse gap-0'>
             <thead className='border border-collapse'>
               <tr className='border border-collapse  border-y-2 border-x-2'>
                 <th>Trainer</th>
@@ -91,13 +108,13 @@ const MonthlyClientReportsPage = () => {
                   className='even:bg-lightGrey border border-y-2 border-x-2'
                 >
                   <td className='p-2'>
-                    {user?.lastname},{" "}{user?.firstname}
+                    {user?.lastname}, {user?.firstname}
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-          <table className='border border-collapse'>
+          <table className='border border-collapse gap-0'>
             <thead className='border border-collapse'>
               <tr className='border border-collapse'>
                 {months?.map((month, idx) => (
@@ -122,7 +139,7 @@ const MonthlyClientReportsPage = () => {
               ))}
             </tbody>
           </table>
-          </>
+        </>
       </div>
     </div>
   );

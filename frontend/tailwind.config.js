@@ -13,7 +13,8 @@ module.exports = {
       black: 'rgb(0, 0, 0)',
       lightGrey: 'rgb(240, 240, 240)',
       red: 'rgb(255, 0, 0)',
-      gray: 'rgb(128, 128, 128)'
+      gray: 'rgb(128, 128, 128)',
+      darkGray: '#63666A',
     },
   },
   plugins: [],

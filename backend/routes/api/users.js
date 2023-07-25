@@ -7,8 +7,8 @@ const { User, MonthlyClientReport } = require('../../db/models');
 const { validateSignup } = require('../../utils/validation');
 const router = express.Router();
 
+// GET all Users, ordered by last name
 router.get('', requireAuth, async (req, res) => {
-  
   const users = await User.findAll({
     attributes: [
       'id',
@@ -27,6 +27,7 @@ router.get('', requireAuth, async (req, res) => {
   res.json({ users });
 })
 
+// GET a specific User
 router.get('/:userId', requireAuth, async (req, res) => {
   const { userId } = req.params;
   const user = await User.findByPk(userId)
@@ -34,6 +35,7 @@ router.get('/:userId', requireAuth, async (req, res) => {
   res.json({ user });
 })
 
+// GET Users monthly reports
 router.get('/monthly-client-reports', requireAuth, async (req, res) => {
   
   const users = await User.findAll({
