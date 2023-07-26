@@ -13,11 +13,9 @@ const MonthlyClientReportsPage = () => {
   // const usersReports = Object.values(useSelector(state => state.users))
   const usersReports = Object.values(useSelector(state => state.monthlyClientReports))
   // const usersReports = useSelector(state => state.monthlyClientReports)
-  console.log('USERS REPORTS === ', usersReports)
+  // console.log('USERS REPORTS === ', usersReports)
   useEffect(() => {
-    console.log('FETCH')
     dispatch(fetchGetMonthlyClientReports())
-    console.log('GOT IT')
   }, [dispatch])
 
   // useEffect(() => {
@@ -52,7 +50,7 @@ const MonthlyClientReportsPage = () => {
     // Loop through users and create a new array with null for each month
     for (const user of users) {
       const monthlyReport = new Array(maxMonths).fill(null);
-
+     
       // Loop through reports
       for (const report of user?.MonthlyClientReports) {
         // If there's a report for the month
@@ -133,8 +131,8 @@ const MonthlyClientReportsPage = () => {
             <tbody className='border border-collapse'>
               {monthlyReports?.map((reports, index) => (
                 <tr key={index} className='px-6 even:bg-lightGrey'>
-                  {reports?.map((report) => (
-                    <td key={report?.id} className={reportsClass(report)}>
+                  {reports?.map((report, index) => (
+                    <td key={index} className={reportsClass(report)}>
                       {report}
                     </td>
                   ))}

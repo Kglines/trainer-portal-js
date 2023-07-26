@@ -31,20 +31,11 @@ router.post('', requireAuth, async (req, res) => {
     const { user } = req;
     const { month, year } = req.body;
 
-    // console.log('************** ', MonthlyClientReport)
-
-    const report = MonthlyClientReport.create({
+    const report = await MonthlyClientReport.create({
         userId: user.id,
         month,
         year
     })
-
-    // if(report.month && report.year){
-    //     const error = new Error("You already turned in a report for this month. Please choose another month.");
-    //     error.status = 400;
-    //     throw error;
-    // }
-
 
     res.status(201);
     res.json(report)

@@ -62,11 +62,11 @@ const ClientReport = () => {
     if(duplicate) return setValidationErrors([
       'You already submitted a report for this month.',
     ]);
-
+    console.log('PAYLOAD FOR CREATE REPORT === ', payload)
     return dispatch(fetchCreateMonthlyClientReports(payload))
-      .then(() => {
-        setIsLoading(false);
-      })
+      // .then(() => {
+      //   setIsLoading(false);
+      // })
       .then(() => {
         closeModal();
       })

@@ -14,6 +14,7 @@ const Reports = () => {
         </Link>
         <Link
           to='/monthly-client-reports'
+          // href='/monthly-client-reports'
           className='border p-36 mx-12 w-96 my-12 shadow-grey shadow-xl hover:scale-105 hover:shadow-darkGray duration-300'
         >
           <h2>Trainer Reports</h2>

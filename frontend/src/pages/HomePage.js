@@ -26,7 +26,7 @@ const HomePage = () => {
     dispatch(fetchGetAnnouncements())
   }, [dispatch])
 
-  console.log('MY ANNOUNCEMENTS === ', myAnnouncements)
+  // console.log('MY ANNOUNCEMENTS === ', myAnnouncements)
 
   if(!sessionUser) return <Redirect to='/'/>
   return (

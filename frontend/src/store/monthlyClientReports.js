@@ -19,7 +19,7 @@ export const createMonthlyClientReports = (reports) => {
 
 export const fetchGetMonthlyClientReports = () => async (dispatch) => {
     const res = await csrfFetch('/api/monthly-client-reports');
-    console.log('GTE REPORTS RES === ', res)
+    console.log('GET REPORTS RES === ', res)
     if(res.ok){
         const monthlyClientReports = await res.json();
         console.log('REPORTS IN THE THUNK === ', monthlyClientReports)
@@ -49,17 +49,17 @@ const initialState = {};
 const monthlyClientReportsReducer = (state = initialState, action) => {
     let newState = { ...state };
 
-    switch(action.type){
-        case GET_MONTHLY_CLIENT_REPORTS:
-            // action.payload.usersReports?.forEach(report => newState[report?.id] = report);
-            newState = action.payload.monthlyClientReports
-            console.log('NEW STATE === ', newState)
-            return newState;
-        case CREATE_MONTHLY_CLIENT_REPORTS:
-            newState = { ...state, [action.payload.id]: action.payload };
-            return newState;
-        default:
-            return newState;
+    switch (action.type) {
+      case GET_MONTHLY_CLIENT_REPORTS:
+        // action.payload.monthlyClientReports?.forEach(report => newState[report?.id] = report);
+        newState = action.payload.monthlyClientReports;
+        console.log('NEW STATE === ', newState);
+        return newState;
+      case CREATE_MONTHLY_CLIENT_REPORTS:
+        newState = { ...state, [action.payload.id]: action.payload };
+        return newState;
+      default:
+        return newState;
     };
 };
 

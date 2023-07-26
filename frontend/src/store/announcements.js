@@ -40,7 +40,6 @@ export const fetchGetAnnouncements = () => async (dispatch) => {
     const res = await csrfFetch('/api/announcements');
     if (res.ok) {
         const announcements = await res.json();
-        console.log('GET MY ANNOUNCEMENTS...', announcements)
         dispatch(getAnnouncements(announcements));
         return announcements;
     };
@@ -68,7 +67,6 @@ export const fetchEditAnnouncement = (announcement) => async (dispatch) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(announcement)
     })
-    console.log('RES IN EDIT ANNOUNCEMENT === ', res)
 
     if(res.ok){
         const announcement = await res.json();
