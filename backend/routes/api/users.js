@@ -30,15 +30,33 @@ router.get('', requireAuth, async (req, res) => {
 // GET a specific User
 router.get('/:userId', requireAuth, async (req, res) => {
   const { userId } = req.params;
-  const user = await User.findByPk(userId)
+  const today = new Date()
+  const thisYear = today.getFullYear();
+  const user = await User.findByPk(userId, {
+    attributes: [
+      'id',
+      'username',
+      'firstname',
+      'lastname',
+      'email',
+      'isAdmin',
+      'profileImg',
+    ],
+    include: [
+      {
+        model: MonthlyClientReport,
+      }
+    ],
+  });
 
   res.json({ user });
 })
 
 // GET Users monthly reports
-router.get('/monthly-client-reports', requireAuth, async (req, res) => {
+router.get('/:userId/monthly-client-reports', requireAuth, async (req, res) => {
+  const { userId } = req.params;
   
-  const users = await User.findAll({
+  const userReports = await User.findByPk(userId, {
     attributes: [
       'id',
       'username',
@@ -58,7 +76,7 @@ router.get('/monthly-client-reports', requireAuth, async (req, res) => {
     }
   });
 
-  res.json({ users })
+  res.json({ userReports })
 })
 
 // Sign up

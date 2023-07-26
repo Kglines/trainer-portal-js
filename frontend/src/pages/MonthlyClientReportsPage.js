@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchGetUsersReports } from '../store/users';
 import PacmanLoader from 'react-spinners/PacmanLoader';
 import { fetchGetMonthlyClientReports } from '../store/monthlyClientReports';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const MonthlyClientReportsPage = () => {
   const dispatch = useDispatch();
@@ -107,8 +108,10 @@ const MonthlyClientReportsPage = () => {
                   key={user?.id}
                   className='even:bg-lightGrey border border-y-2 border-x-2'
                 >
-                  <td className='p-2'>
-                    {user?.lastname}, {user?.firstname}
+                  <td className='p-2 hover:text-secondary'>
+                    <Link to={`/trainers/${user?.id}`}>
+                      {user?.lastname}, {user?.firstname}
+                    </Link>
                   </td>
                 </tr>
               ))}

@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchGetClients } from '../store/clients';
 import OpenModalButton from '../components/OpenModalButton';
 import CreateClient from '../components/CreateClient';
-import ClientReport from '../components/ClientReport';
+import CreateClientReport from '../components/CreateClientReport';
 
 const ClientsPage = () => {
   const dispatch = useDispatch();
+
   const sessionUser = useSelector(state => state.session.user);
   
   const clients = useSelector(state => state.clients);
@@ -55,7 +56,7 @@ const ClientsPage = () => {
         <OpenModalButton
           buttonText='Generate Report'
           className='bg-primary text-white rounded-md p-2 mt-2 w-1/3'
-          modalComponent={<ClientReport />}
+          modalComponent={<CreateClientReport />}
         />
       </div>
     </div>

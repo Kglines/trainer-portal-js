@@ -19,7 +19,7 @@ export const createMonthlyClientReports = (reports) => {
 
 export const fetchGetMonthlyClientReports = () => async (dispatch) => {
     const res = await csrfFetch('/api/monthly-client-reports');
-console.log('REPORTS RES === ', res)
+    console.log('GTE REPORTS RES === ', res)
     if(res.ok){
         const monthlyClientReports = await res.json();
         console.log('REPORTS IN THE THUNK === ', monthlyClientReports)
@@ -38,7 +38,7 @@ export const fetchCreateMonthlyClientReports = (report) => async (dispatch) => {
 
     if (res.ok){
         const report = await res.json();
-        dispatch(getMonthlyClientReports(report));
+        dispatch(createMonthlyClientReports(report));
         return report;
     };
     return res;
@@ -52,8 +52,8 @@ const monthlyClientReportsReducer = (state = initialState, action) => {
     switch(action.type){
         case GET_MONTHLY_CLIENT_REPORTS:
             // action.payload.usersReports?.forEach(report => newState[report?.id] = report);
-            newState = action.payload.usersReports
-           console.log('NEW STATE === ', newState)
+            newState = action.payload.monthlyClientReports
+            console.log('NEW STATE === ', newState)
             return newState;
         case CREATE_MONTHLY_CLIENT_REPORTS:
             newState = { ...state, [action.payload.id]: action.payload };

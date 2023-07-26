@@ -2,7 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const GET_USERS = 'users/get';
 const GET_A_USER = 'user/get';
-const GET_USERS_REPORTS = 'usersReports/get';
+const GET_USER_REPORTS = 'usersReports/get';
 
 export const getUsers = (users) => {
     return {
@@ -18,9 +18,9 @@ export const getAUser = (user) => {
     };
 };
 
-export const getUsersReports = (reports) => {
+export const getUserReports = (reports) => {
     return {
-        type: GET_USERS_REPORTS,
+        type: GET_USER_REPORTS,
         payload: reports
     };
 };
@@ -48,12 +48,12 @@ export const fetchGetAUser = (userId) => async (dispatch) => {
     return res;
 };
 
-export const fetchGetUsersReports = () => async (dispatch) => {
-    const res = await csrfFetch('/api/users/monthly-client-reports');
-
+export const fetchGetUserReports = (userId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/users/${userId}/monthly-client-reports`);
+console.log('GET USER REPORT RES === ', res)
     if(res.ok){
         const usersReports = await res.json();
-        dispatch(getUsersReports(usersReports));
+        dispatch(getUserReports(usersReports));
         return usersReports;
     };
     return res;
@@ -72,9 +72,10 @@ const usersReducer = (state = initialState, action) => {
         case GET_A_USER:
             newState = action.payload;
             return newState;
-        case GET_USERS_REPORTS:
-            action.payload.users.forEach(user => newState[user.id] = user);
-            // newState = action.payload;
+        case GET_USER_REPORTS:
+            // action.payload.userReports.forEach(user => newState[user.id] = user);
+            newState = action.payload;
+            console.log('NEW STATE USER REPORT === ', newState)
             return newState;
         default:
             return newState;

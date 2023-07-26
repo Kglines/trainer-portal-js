@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import { fetchGetClients } from '../../store/clients';
 import { fetchCreateMonthlyClientReports, fetchGetMonthlyClientReports } from '../../store/monthlyClientReports';
+import { fetchGetUserReports } from '../../store/users';
 
 const ClientReport = () => {
   const dispatch = useDispatch();
@@ -11,18 +12,21 @@ const ClientReport = () => {
   const sessionUser = useSelector(state => state.session.user);
   const clients = useSelector(state => state.clients?.clients).filter(client => client?.userId === sessionUser?.id)
 
-  const monthlyClientReports = Object.values(useSelector(state => state.monthlyClientReports)).filter(report => report.userId === sessionUser.id)
+  const monthlyClientReports = useSelector(state => state.users)
+    // .filter(report => report?.userId === sessionUser?.id)
 
-  
+    console.log('MONTHLY CLIENT REPORTS === ', monthlyClientReports?.userReports?.MonthlyClientReports)
 
-  
   useEffect(() => {
     dispatch(fetchGetClients())
   }, [dispatch])
 
   useEffect(() => {
-    dispatch(fetchGetMonthlyClientReports())
-  }, [dispatch])
+    dispatch(fetchGetUserReports(sessionUser?.id))
+  }, [dispatch, sessionUser?.id])
+  // useEffect(() => {
+  //   dispatch(fetchGetMonthlyClientReports())
+  // }, [dispatch])
 
   const today = new Date();
   const thisYear = today.getFullYear();
@@ -45,9 +49,15 @@ const ClientReport = () => {
       return setValidationErrors(['**** Please choose a month! ****']);
     }
 
-    const duplicate = monthlyClientReports.find(report => {
-      return report.month === parseInt(reportMonth) && report.year === parseInt(reportYear)
-    })
+    const duplicate =
+      monthlyClientReports?.userReports?.MonthlyClientReports.find((report) => {
+        return (
+          report.month === parseInt(reportMonth) &&
+          report.year === parseInt(reportYear)
+        );
+      });
+
+    console.log('DUPLICATE === ', duplicate)
     
     if(duplicate) return setValidationErrors([
       'You already submitted a report for this month.',
@@ -60,10 +70,10 @@ const ClientReport = () => {
       .then(() => {
         closeModal();
       })
-      .catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setValidationErrors(data.errors);
-      });
+      // .catch(async (res) => {
+      //   const data = await res.json();
+      //   if (data && data.errors) setValidationErrors(data.errors);
+      // });
   }
 
   const months = [

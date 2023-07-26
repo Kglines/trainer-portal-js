@@ -10,7 +10,7 @@ const { requireAuth } = require('../../utils/auth');
 // })
 
 router.get('', requireAuth, async (req, res) => {
-    const usersReports = await User.findAll({
+    const monthlyClientReports = await User.findAll({
         order: [
             ['lastname']
         ],
@@ -24,7 +24,7 @@ router.get('', requireAuth, async (req, res) => {
         },
         
     })
-    res.json({ usersReports });
+    res.json({ monthlyClientReports });
 })
 
 router.post('', requireAuth, async (req, res) => {
