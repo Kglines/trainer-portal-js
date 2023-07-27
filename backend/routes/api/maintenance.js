@@ -14,7 +14,7 @@ router.get('', requireAuth, async (req, res) => {
 })
 
 router.post('', requireAuth, async (req, res) => {
-    const { user } = req.params;
+    const { user } = req;
     const { machineId, title, description, isPending, isFixed } = req.body;
 
     const maintenance = await Maintenance.create({
