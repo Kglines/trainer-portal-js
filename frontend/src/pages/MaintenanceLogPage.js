@@ -20,7 +20,11 @@ const MaintenanceLogPage = () => {
     <div className='sm:w-full md:w-5/6 bg-white mx-auto text-center min-h-screen pb-2'>
       <div className='flex flex-col mx-auto xs:w-3/4 md:w-64 lg:w-80'>
         <h2 className='text-3xl pt-12'>Maintenance Log</h2>
-        <OpenModalButton modalComponent={<CreateMaintenance />} buttonText='Add Entry' className='bg-secondary text-white rounded-md p-2 mt-2 sm:w-full md:w-5/6 mx-auto hover:bg-secondaryHover' />
+        <OpenModalButton
+          modalComponent={<CreateMaintenance />}
+          buttonText='Add Entry'
+          className='bg-secondary text-white rounded-md p-2 mt-2 sm:w-full md:w-5/6 mx-auto hover:bg-secondaryHover'
+        />
       </div>
       <div className='sm:w-full md:w-2/3 mx-auto mt-8 mb-12 pb-12'>
         <table>
@@ -33,7 +37,7 @@ const MaintenanceLogPage = () => {
               <th className='px-2 border'>Pending</th>
               <th className='px-2 border'>Fixed</th>
               <th className='px-2 border'>Date Fixed</th>
-              <th className='px-2 border'>Edit</th>
+              {sessionUser.isAdmin && <th className='px-2 border'>Edit</th>}
             </tr>
           </thead>
           <tbody>
@@ -53,7 +57,13 @@ const MaintenanceLogPage = () => {
                 <td className='px-2 border'>
                   {problem.updatedAt ? problem.updatedAt : ''}
                 </td>
-                <td className='px-2 border'>EDIT</td>
+                {sessionUser?.isAdmin && (
+                  <td className='px-2 border'>
+                    <button className='bg-secondary text-white rounded-md p-2 mt-2 w-full mx-auto hover:bg-secondaryHover'>
+                      FIXED
+                    </button>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>
