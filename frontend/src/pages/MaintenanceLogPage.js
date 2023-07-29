@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGetMaintenance } from '../store/maintenance';
 import OpenModalButton from '../components/OpenModalButton';
@@ -9,12 +9,11 @@ const MaintenanceLogPage = () => {
 
   const problems = Object.values(useSelector(state => state.maintenance))
   const sessionUser = useSelector(state => state.session.user);
-
-  console.log('PROBLEMS === ', problems)
   
   useEffect(() => {
     dispatch(fetchGetMaintenance());
   }, [dispatch]);
+
 
   return (
     <div className='sm:w-full md:w-5/6 bg-white mx-auto text-center min-h-screen pb-2'>
