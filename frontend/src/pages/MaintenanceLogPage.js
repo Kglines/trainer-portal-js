@@ -46,7 +46,7 @@ const MaintenanceLogPage = () => {
                 <td className='px-2 border'>{problem?.machineId}</td>
                 <td className='px-2 border'>{problem?.Machine?.name}</td>
                 <td className='px-2 border'>{problem?.title}</td>
-                <td className='px-2 border'>{problem?.description}</td>
+                <td className='px-2 border w-96'>{problem?.description}</td>
                 <td className='px-2 border' type='checkbox'>
                   {problem?.isPending ? 'Yes' : 'No'}
                 </td>
@@ -54,7 +54,7 @@ const MaintenanceLogPage = () => {
                   {problem?.isFixed ? 'Yes' : 'No'}
                 </td>
                 <td className='px-2 border'>
-                  {problem.updatedAt ? problem.updatedAt : ''}
+                  {problem?.updatedAt ? problem.updatedAt : ''}
                 </td>
                 {sessionUser?.isAdmin && (
                   <td className='px-2 border'>
