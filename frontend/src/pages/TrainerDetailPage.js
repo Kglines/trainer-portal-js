@@ -2,13 +2,22 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { fetchGetAUser } from '../store/users';
+import { fetchGetReportDetails } from '../store/reportDetails';
 
 const TrainerDetailPage = () => {
   const dispatch = useDispatch();
   const { trainerId } = useParams();
 
   const trainer = useSelector(state => state.users.user);
-console.log('TRAINER === ', trainer)
+
+  const reportDetails = useSelector(state => state.reportDetails);
+
+  console.log('REPORT === ', reportDetails)
+
+  useEffect(() => {
+    dispatch(fetchGetReportDetails())
+  }, [dispatch])
+
   useEffect(() => {
     dispatch(fetchGetAUser(trainerId))
   }, [dispatch, trainerId])
