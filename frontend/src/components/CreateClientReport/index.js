@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import { fetchGetClients } from '../../store/clients';
@@ -36,7 +36,7 @@ const ClientReport = () => {
   const [validationErrors, setValidationErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = useCallback((e) => {
     e.preventDefault();
 
     const payload = {
@@ -52,8 +52,8 @@ const ClientReport = () => {
     const duplicate =
       monthlyClientReports?.userReports?.MonthlyClientReports.find((report) => {
         return (
-          report.month === parseInt(reportMonth) &&
-          report.year === parseInt(reportYear)
+          report?.month === parseInt(reportMonth) &&
+          report?.year === parseInt(reportYear)
         );
       });
 
@@ -62,7 +62,7 @@ const ClientReport = () => {
     if(duplicate) return setValidationErrors([
       'You already submitted a report for this month.',
     ]);
-    console.log('PAYLOAD FOR CREATE REPORT === ', payload)
+    
     return dispatch(fetchCreateMonthlyClientReports(payload))
       // .then(() => {
       //   setIsLoading(false);
@@ -74,7 +74,7 @@ const ClientReport = () => {
       //   const data = await res.json();
       //   if (data && data.errors) setValidationErrors(data.errors);
       // });
-  }
+  }, [dispatch, reportMonth, reportYear, sessionUser, monthlyClientReports, closeModal]);
 
   const months = [
     '--Please choose a month--',

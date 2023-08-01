@@ -38,7 +38,7 @@ const EditAnnouncementForm = ({ announcement }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className='w-auto h-96'>
+    <form onSubmit={handleSubmit} className='w-auto h-auto'>
       <div>
         <h2 className='text-white bg-primary text-center text-2xl'>
           Edit Announcement
@@ -47,20 +47,20 @@ const EditAnnouncementForm = ({ announcement }) => {
       {validationErrors?.map((error) => (
         <li key={error}>{error}</li>
       ))}
-      <div className='my-4 p-4 flex flex-col h-64'>
+      <div className='my-4 p-4 flex flex-col h-auto'>
         <label className='mx-2'>
           Month
-        <input
-          type='number'
-          value={month}
-          onChange={(e) => setMonth(e.target.value)}
-          name='Month'
-          className='bg-lightGrey my-2 h-12 text-xl mx-2 w-16 px-3'
-        />
+          <input
+            type='number'
+            value={month}
+            onChange={(e) => setMonth(e.target.value)}
+            name='Month'
+            className='bg-lightGrey my-2 h-12 text-xl mx-2 w-16 px-3'
+          />
         </label>
         <QuillEditor value={body} setValue={handleChange} />
       </div>
-      <div className='text-center my-4'>
+      <div className='text-center my-4 pt-2'>
         <button
           type='submit'
           className='bg-primary hover:bg-primaryHover text-white rounded p-2 mx-2 disabled:bg-disabledPrimary'

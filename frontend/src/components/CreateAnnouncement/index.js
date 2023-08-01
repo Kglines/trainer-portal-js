@@ -48,7 +48,7 @@ const CreateAnnouncement = () => {
     }    
 
   return (
-    <form onSubmit={handleSubmit} className='w-auto h-96'>
+    <form onSubmit={handleSubmit} className='w-auto h-auto'>
       <div>
         <h2 className='text-white bg-primary text-center text-2xl'>
           Create Announcement
@@ -58,7 +58,7 @@ const CreateAnnouncement = () => {
         {validationErrors &&
           validationErrors?.map((error) => <li key={error}>{error}</li>)}
       </ul>
-      <div className='my-4 p-4 flex flex-col h-64'>
+      <div className='my-4 p-4 flex flex-col h-auto'>
         <label className='mx-2'>
           Month
           <input
@@ -71,7 +71,7 @@ const CreateAnnouncement = () => {
         </label>
         <QuillEditor value={body} setValue={handleChange} />
       </div>
-      <div className='text-center my-4'>
+      <div className='text-center my-4 pt-2'>
         <button
           type='submit'
           disabled={isDisabled()}

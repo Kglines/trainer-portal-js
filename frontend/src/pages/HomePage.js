@@ -6,7 +6,8 @@ import OpenModalButton from '../components/OpenModalButton';
 import EditAnnouncementForm from '../components/EditAnnouncementForm.js';
 import DeleteAnnouncement from '../components/DeleteAnnouncement';
 import CreateAnnouncement from '../components/CreateAnnouncement';
-import parser from 'html-react-parser';
+import parse from 'html-react-parser';
+// import ReactHtmlParser from 'react-html-parser';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -25,8 +26,6 @@ const HomePage = () => {
   useEffect(() => {
     dispatch(fetchGetAnnouncements())
   }, [dispatch])
-
-  // console.log('MY ANNOUNCEMENTS === ', myAnnouncements)
 
   if(!sessionUser) return <Redirect to='/'/>
   return (
@@ -48,11 +47,14 @@ const HomePage = () => {
         <div className='my-8 pb-24'>
           <ul className='text-left w-4/5 mx-auto flex-row'>
             {myAnnouncements?.map((announcement) => (
-              <li
+              <div
                 key={announcement?.id}
                 className='py-1 flex flex-nowrap odd:white even:bg-lightGrey justify-between'
               >
-                {parser(announcement?.body)}{' '}
+                <li>
+                  {parse(announcement?.body)}
+                  {/* {ReactHtmlParser(announcement?.body)} */}
+                </li>
                 {sessionUser.isAdmin && (
                   <div className='flex justify-end'>
                     <OpenModalButton
@@ -75,7 +77,7 @@ const HomePage = () => {
                     />
                   </div>
                 )}
-              </li>
+              </div>
             ))}
             {/* <li>
               <p>6/12 - this thing is going to happen</p>

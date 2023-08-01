@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGetUsersReports } from '../store/users';
 import PacmanLoader from 'react-spinners/PacmanLoader';
@@ -13,7 +13,7 @@ const MonthlyClientReportsPage = () => {
   // const usersReports = Object.values(useSelector(state => state.users))
   const usersReports = Object.values(useSelector(state => state.monthlyClientReports))
   // const usersReports = useSelector(state => state.monthlyClientReports)
-  // console.log('USERS REPORTS === ', usersReports)
+  console.log('USERS REPORTS === ', usersReports)
   useEffect(() => {
     dispatch(fetchGetMonthlyClientReports())
   }, [dispatch])
@@ -51,15 +51,17 @@ const MonthlyClientReportsPage = () => {
     for (const user of users) {
       const monthlyReport = new Array(maxMonths).fill(null);
      
-      // Loop through reports
-      for (const report of user?.MonthlyClientReports) {
-        // If there's a report for the month
-        const month = report?.month;
-        // Adjust for zero-indexed array
-        const index = month - 1; 
-
-        // Assign the month value at the index
-        monthlyReport[index] = month;
+      if(user?.MonthlyClientReports){
+        // Loop through reports
+        for (const report of user?.MonthlyClientReports) {
+          // If there's a report for the month
+          const month = report?.month;
+          // Adjust for zero-indexed array
+          const index = month - 1; 
+  
+          // Assign the month value at the index
+          monthlyReport[index] = month;
+        }
       }
 
       result.push(monthlyReport);
@@ -68,10 +70,14 @@ const MonthlyClientReportsPage = () => {
     return result;
   }
 
-  
+  // const monthlyReports = useCallback(() => {
+  //   return generateMonthlyReportArray(usersReports)
+  // }, [usersReports])
   const monthlyReports = useMemo(() => {
     return generateMonthlyReportArray(usersReports)
   }, [usersReports]);
+
+  console.log('MONTHLY REPORTS === ', monthlyReports);
   
 
   const reportsClass = (report) => {
