@@ -22,7 +22,7 @@ function Navigation({ isLoaded }) {
   if (sessionUser) {
     sessionLinks = (
       <li className='flex mt-2'>
-        <ProfileButton user={sessionUser} />
+        {/* <ProfileButton user={sessionUser} /> */}
         {/* <div className='rounded-full'>
           <select className='rounded-lg' placeholder='Profile'>
             <option>Profile</option>
