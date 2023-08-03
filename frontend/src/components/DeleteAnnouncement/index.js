@@ -6,18 +6,24 @@ import { useModal } from '../../context/Modal';
 
 const DeleteAnnouncement = ({ announcementId }) => {
     const dispatch = useDispatch();
+    console.log('Announcement ID === ', typeof announcementId)
     // const history = useHistory();
     const { closeModal } = useModal();
     const [validationErrors, setValidationErrors] = useState([]);
 
     const onDelete = () => {
-        dispatch(fetchDeleteAnnouncement(announcementId))
-        return dispatch(fetchGetAnnouncements())
-          .then(() => {
-            closeModal();
-            document.location.reload();
-            return dispatch(fetchGetAnnouncements());
-          })
+      return dispatch(fetchDeleteAnnouncement(announcementId))
+        .then(() => {
+          dispatch(fetchGetAnnouncements())
+          return closeModal();
+        })
+        // dispatch(fetchDeleteAnnouncement(announcementId))
+        // return dispatch(fetchGetAnnouncements())
+        //   .then(() => {
+        //     closeModal();
+        //     document.location.reload();
+        //     return dispatch(fetchGetAnnouncements());
+        //   })
           .catch(async (res) => {
             const data = await res.json();
             if (data && data.errors) setValidationErrors(data.errors);

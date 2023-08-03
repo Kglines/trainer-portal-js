@@ -15,6 +15,7 @@ router.get('', requireAuth, async (req, res) => {
             'updatedAt'
         ]
     });
+    console.log('************* announcements === ', announcements)
     res.json({ announcements });
 })
 
@@ -54,9 +55,9 @@ router.put('/:announcementId', requireAuth, async (req, res) => {
 // Delete an Announcement
 router.delete('/:announcementId', requireAuth, async (req, res) => {
     const { announcementId } = req.params;
-
+    console.log('announcementId === ', announcementId)
     const announcement = await Announcement.findByPk(announcementId);
-   
+   console.log('Announcement === ', announcement);
     if(announcement){
         await announcement.destroy();
         return res.json({

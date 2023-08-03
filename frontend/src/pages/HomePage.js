@@ -15,13 +15,18 @@ const HomePage = () => {
   const sessionUser = useSelector(state => state.session.user);
   const today = new Date();
   const currentMonth = today.getMonth();
-  const announcements = Object.values(useSelector(state => state.announcements))
+  // const announcements = Object.values(useSelector(state => state.announcements))
+  const announcements = useSelector(state => state.announcements.announcements)
 
-  const myAnnouncements = useMemo(() => {
-    const data = announcements.filter(
-      (announcement) => announcement.month === currentMonth + 1)
-      return data;
-  }, [announcements, currentMonth])
+  // const myAnnouncements = useMemo(() => {
+  //   const data = announcements.filter(
+  //     (announcement) => announcement.month === currentMonth + 1)
+  //     return data;
+  // }, [announcements, currentMonth])
+
+  const myAnnouncements = announcements?.filter(announcement => announcement?.month === currentMonth + 1
+)
+
 
   useEffect(() => {
     dispatch(fetchGetAnnouncements())
@@ -53,7 +58,6 @@ const HomePage = () => {
               >
                 <li>
                   {parse(announcement?.body)}
-                  {/* {ReactHtmlParser(announcement?.body)} */}
                 </li>
                 {sessionUser.isAdmin && (
                   <div className='flex justify-end'>
