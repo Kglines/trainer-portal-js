@@ -65,19 +65,26 @@ const CreateMaintenance = () => {
         </h2>
       </div>
       <div className='my-4 p-4 flex flex-col h-56'>
-        <input
-          className='bg-lightGrey my-2 h-12 text-xl mx-2 w-64 px-3'
-          type='number'
-          placeholder='Number'
-          value={number}
-          onChange={(e) => setNumber(e.target.value)}
-        />
+        <span className='content-center'>
+          <label className='flex flex-row items-center'>
+            Machine Number
+            <input
+              className='bg-lightGrey my-2 h-12 text-xl mx-2 w-24 px-3'
+              type='number'
+              placeholder='Number'
+              value={number}
+              onChange={(e) => setNumber(e.target.value)}
+            />
+          </label>
+        </span>
+
         <input
           type='text'
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className='bg-lightGrey my-2 h-12 text-xl mx-2 w-64 px-3'
+          className='bg-lightGrey my-2 h-12 text-xl mx-2 w-auto px-3'
           autoComplete='on'
+          placeholder='Problem Title'
         />
         <textarea
           type='text'
@@ -86,10 +93,23 @@ const CreateMaintenance = () => {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           className='bg-lightGrey my-2 h-auto text-xl mx-2 w-auto px-3'
+          placeholder='Describe the problem here...'
         />
       </div>
-      <div>
-        <button>submit</button>
+      <div className='text-center my-4'>
+        <button
+          type='submit'
+          // disabled={isDisabled()}
+          className='bg-primary hover:bg-primaryHover text-white rounded p-2 mx-2 disabled:bg-disabledPrimary'
+        >
+          Submit
+        </button>
+        <button
+          onClick={() => closeModal()}
+          className='bg-secondary hover:bg-secondaryHover text-white rounded p-2 mx-2'
+        >
+          Cancel
+        </button>
       </div>
     </form>
   );
