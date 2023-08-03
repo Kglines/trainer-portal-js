@@ -7,7 +7,6 @@ import EditAnnouncementForm from '../components/EditAnnouncementForm.js';
 import DeleteAnnouncement from '../components/DeleteAnnouncement';
 import CreateAnnouncement from '../components/CreateAnnouncement';
 import parse from 'html-react-parser';
-// import ReactHtmlParser from 'react-html-parser';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -15,18 +14,13 @@ const HomePage = () => {
   const sessionUser = useSelector(state => state.session.user);
   const today = new Date();
   const currentMonth = today.getMonth();
-  // const announcements = Object.values(useSelector(state => state.announcements))
   const announcements = useSelector(state => state.announcements.announcements)
 
-  // const myAnnouncements = useMemo(() => {
-  //   const data = announcements.filter(
-  //     (announcement) => announcement.month === currentMonth + 1)
-  //     return data;
-  // }, [announcements, currentMonth])
-
-  const myAnnouncements = announcements?.filter(announcement => announcement?.month === currentMonth + 1
-)
-
+  const myAnnouncements = useMemo(() => {
+    const data = announcements.filter(
+      (announcement) => announcement.month === currentMonth + 1)
+      return data;
+  }, [announcements, currentMonth])
 
   useEffect(() => {
     dispatch(fetchGetAnnouncements())
@@ -83,24 +77,6 @@ const HomePage = () => {
                 )}
               </div>
             ))}
-            {/* <li>
-              <p>6/12 - this thing is going to happen</p>
-            </li>
-            <li>
-              <p>6/18 - this other thing is going to happen</p>
-            </li>
-            <li>
-              <p>6/20 - no thing is going on today</p>
-            </li>
-            <li>
-              <p>6/12 - this thing is going to happen</p>
-            </li>
-            <li>
-              <p>6/18 - this other thing is going to happen</p>
-            </li>
-            <li>
-              <p>6/20 - no thing is going on today</p>
-            </li> */}
           </ul>
         </div>
       </div>
