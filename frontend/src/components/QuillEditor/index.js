@@ -1,12 +1,24 @@
 import React from 'react'
-import ReactQuill, { Quill } from 'react-quill'
+import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css';
 
 const QuillEditor = ({ value, setValue }) => {
 
-    // const quill = new Quill();
+    // const quill = new ReactQuill('#editor', {
+    //   modules: {
+    //     toolbar: [
+    //       [{ header: [1, 2, 3, 4, 5, 6, false] }],
+    //       ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    //       [{ size: [] }],
+    //       [{ font: [] }],
+    //       [{ align: ['right', 'center', 'justify'] }],
+    //       [{ list: 'ordered' }, { list: 'bullet' }],
+    //       ['link', 'image'],
+    //     ],
+    //   },
+    // });
 
-  //  console.log('QUILL === ', Quill.register({'modules/toolbar': true}));
+  //  console.log('QUILL === ', quill);
   
     const modules = {
       toolbar: [
@@ -23,17 +35,17 @@ const QuillEditor = ({ value, setValue }) => {
     };
     const formats = [
       'header',
+      'indent',
       'bold',
       'italic',
       'underline',
       'strike',
-      'blockquote',
+      'script',
       'list',
       'bullet',
       'link',
       'color',
       'image',
-      'background',
       'align',
       'size',
       'font',

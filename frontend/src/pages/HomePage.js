@@ -7,6 +7,8 @@ import EditAnnouncementForm from '../components/EditAnnouncementForm.js';
 import DeleteAnnouncement from '../components/DeleteAnnouncement';
 import CreateAnnouncement from '../components/CreateAnnouncement';
 import parse from 'html-react-parser';
+import 'react-quill/dist/quill.snow.css';
+
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -16,9 +18,14 @@ const HomePage = () => {
   const currentMonth = today.getMonth();
   const announcements = useSelector(state => state.announcements.announcements)
 
+  console.log(
+    'announcements === ',
+    announcements?.map((announcement) => <p>{parse(announcement?.body)}</p>)
+  );
+
   const myAnnouncements = useMemo(() => {
-    const data = announcements.filter(
-      (announcement) => announcement.month === currentMonth + 1)
+    const data = announcements?.filter(
+      (announcement) => announcement?.month === currentMonth + 1)
       return data;
   }, [announcements, currentMonth])
 
