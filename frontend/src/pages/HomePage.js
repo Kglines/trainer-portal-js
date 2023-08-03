@@ -18,10 +18,10 @@ const HomePage = () => {
   const currentMonth = today.getMonth();
   const announcements = useSelector(state => state.announcements.announcements)
 
-  console.log(
-    'announcements === ',
-    announcements?.map((announcement) => <p>{parse(announcement?.body)}</p>)
-  );
+  // console.log(
+  //   'announcements === ',
+  //   announcements?.map((announcement) => <p>{parse(announcement?.body)}</p>)
+  // );
 
   const myAnnouncements = useMemo(() => {
     const data = announcements?.filter(
